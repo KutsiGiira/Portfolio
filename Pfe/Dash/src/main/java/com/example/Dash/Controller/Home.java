@@ -9,4 +9,16 @@ public class Home {
     public String home(){
         return "home";
     }
+    public class student {
+        @GetMapping("/student")
+        public String student(){
+            return "test";
+        }
+    }
+    public class teacher {
+        @GetMapping("/teacher")
+        public String teacher() {
+            return "teacher";
+            }
+        }
 }

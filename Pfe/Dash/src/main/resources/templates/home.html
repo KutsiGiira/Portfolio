@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>DashBoard</title>
 </head>
 <body>
 <div>
-    <ul>
-        <li>Home</li>
-        <li>Student page</li>
-        <li>Teachers</li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/student">Student</a></li>
+            <li><a href="/teacher">Teacher</a></li>
+        </ul>
+    </nav>
+</div>
+<div layout:fragment="content">
+    <p>Home page</p>
 </div>
 </body>
 </html>
