@@ -7,18 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Home {
     @GetMapping("/")
     public String home(){
-        return "home";
+        return "index";
     }
-    public class student {
-        @GetMapping("/student")
-        public String student(){
-            return "test";
-        }
+    @GetMapping("/student")
+    public String student(){
+        return "student";
     }
-    public class teacher {
-        @GetMapping("/teacher")
-        public String teacher() {
-            return "teacher";
-            }
-        }
+    @GetMapping("/teacher")
+    public String teacher(){
+        return "teacher";
+    }
 }
