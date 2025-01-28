@@ -3,13 +3,17 @@
     padding : 0px;
 }
 
+main{
+    display: grid;
+    grid-template-columns: 18% 82%;
+    grid-template-rows: 1fr;
+
+}
 .bar{
     background-color: #152259;
-    width: 20%;
     height: 100vh;
     color: white;
-    display: flex;
-    flex-direction: column;
+    grid-area: 1;
 
 }
 .top{
@@ -43,4 +47,13 @@ li{
 }
 .notActive{
     background-color: none;
+}
+
+.page{
+    grid-area: 1;
+}
+
+.Adding{
+    background-color: green;
+    z-index: 1;
 }
