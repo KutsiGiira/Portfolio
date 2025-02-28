@@ -1,0 +1,22 @@
+#dash{
+    background-color: bisque;
+}
+
+.content{
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    width: 50vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index:1;
+    background-color: transparent;
+}
+p {
+    text-decoration: underline;
+    font-size: xx-large;
+    cursor: pointer;
+    text-decoration: none;
+}
