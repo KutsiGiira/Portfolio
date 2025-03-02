@@ -1,0 +1,11 @@
+.frm{
+    background-color: white;
+    border: #152259 1px solid;
+    height: 70vh;
+    width: 70vw;
+    z-index: 4;
+    position: fixed;
+    display: none;
+    top: 10%;
+    left: 20%;
+}

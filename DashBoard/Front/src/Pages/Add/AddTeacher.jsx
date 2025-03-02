@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import './AddStudent.css';
+import './AddTeacher.css'
 import close from './closeG.svg';
-function AddStudent({style, onClose}){
+function AddTeacher({style, onClose}){
     return(
-        <main className='form' style={style}>
-            <img src={close} alt="close" onClick={onClose} width={30} id="x"/>
-            <form action="">
-                <div id='f'>
+        <main className='frm' style={style}>
+                        <img src={close} alt="close" onClick={onClose} width={30} id="x"/>
+                <form action="">
+                <div id='frow'>
                         <div>
                             <label>First name: </label>
                             <input type="text" name="" id="" />
@@ -17,9 +16,9 @@ function AddStudent({style, onClose}){
                             <input type="text" name="" id="" />
                         </div>
                 </div>
-                <div id="r"> 
+                <div id="rrow"> 
                         <div>
-                            <label>Address: </label>
+                            <label>Address</label>
                             <input type="text" name="" id="" />
                         </div>
 
@@ -31,7 +30,7 @@ function AddStudent({style, onClose}){
 
                 <div>
                     <div>
-                        <label>Class: </label>
+                        <label>Subject :  </label>
                         <input type="text" name="" id="" />
                     </div>
                     <button type="submit" id='btn'>Register</button>
@@ -40,4 +39,4 @@ function AddStudent({style, onClose}){
         </main>
     )
 }
-export default AddStudent;
+export default AddTeacher;
