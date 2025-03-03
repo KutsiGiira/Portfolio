@@ -5,3 +5,33 @@
 
     width: 100vw;
 }
+.studentPage{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr;
+    grid-template-areas:"header""body";
+    height: 100vh;
+    background-color: purple;
+}
+.topSection{
+    grid-area:header;
+
+}
+.bodySection{
+    grid-area: body;
+    background-color: pink;
+}
+#butn{
+    padding: 20px;
+    position: relative;
+    left: 85%;
+    top: 20%;
+    background-color:#152259;
+    border: none;
+    border-radius: 10px;
+}
+
+#butn:hover{
+    background-color:white;
+    color: #152259;
+}

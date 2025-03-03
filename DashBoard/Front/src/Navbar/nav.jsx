@@ -4,7 +4,8 @@ function Nav(){
     return(
         <nav>
             <div className="LogoTitle">
-                <img src="https://cdn.freebiesupply.com/letters/large/fancy-b.jpg" alt="logo" width={100} id="logo"/>
+                <a href="/"><img src="https://cdn.freebiesupply.com/letters/large/fancy-b.jpg" alt="logo" width={100} id="logo"/>
+                </a>
                 <span>Black Education</span>
             </div>
             <hr />

@@ -4,38 +4,36 @@ import close from './closeG.svg';
 function AddStudent({style, onClose}){
     return(
         <main className='form' style={style}>
-            <img src={close} alt="close" onClick={onClose} width={30} id="x"/>
-            <form action="">
-                <div id='f'>
-                        <div>
-                            <label>First name: </label>
-                            <input type="text" name="" id="" />
-                        </div>
-
-                        <div>
-                            <label>Last name: </label>
-                            <input type="text" name="" id="" />
-                        </div>
-                </div>
-                <div id="r"> 
-                        <div>
-                            <label>Address: </label>
-                            <input type="text" name="" id="" />
-                        </div>
-
-                        <div>
-                            <label>Phone number: </label>
-                            <input type="text" name="" id="" />
-                        </div>
-                </div>
-
-                <div>
-                    <div>
-                        <label>Class: </label>
-                        <input type="text" name="" id="" />
-                    </div>
-                    <button type="submit" id='btn'>Register</button>
-                </div>
+            <img src={close} alt="close" onClick={onClose} id="x"/>
+                <h1 id='rns'>Register New Student</h1>
+            <form action="" className='sForm'>
+                <section id='s1' className='sec'>
+                    <span>
+                        <label>First Name: </label>
+                        <input id="sInp" type="text" name="" placeholder='First name' />
+                    </span>
+                    <span>
+                        <label>Last Name: </label>
+                        <input id="sInp" type="text" name="" placeholder='Last Name' />
+                    </span>
+                </section>
+                <section id='s2' className='sec'>
+                    <span>
+                        <label>Address: </label>
+                        <input id="sInp" type="text" name="" placeholder='Address' />
+                    </span>
+                    <span>
+                        <label>Telephone: </label>
+                        <input id="sInp" type="number" name="" placeholder='Telephone' />
+                    </span>
+                    </section>
+                    <section id='s3' className='sec'>
+                    <span>
+                        <label>Grade: </label>
+                        <input id="sInp" type="text" name="" placeholder='Grade' />
+                    </span>
+                </section>
+                <button type="submit" id='sSub'>Register</button>
             </form>
         </main>
     )
