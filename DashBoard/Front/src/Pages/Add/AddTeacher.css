@@ -60,10 +60,12 @@
     background-color:#152259;
     border: none;
     border-radius: 10px;
+    color: white;
 }
 #sSub:hover{
     background-color:white;
     color: #152259;
+    border: #152259 1px solid;
 }
 label{
     color: #152259;

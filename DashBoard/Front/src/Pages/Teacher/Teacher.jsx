@@ -21,9 +21,9 @@ function Teacher(){
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Address</th>
                     <th>Phone number</th>
                     <th>Subject</th>
+                    <th>Class</th>
                     <th>Cin</th>
                 </tr>
                 </thead>

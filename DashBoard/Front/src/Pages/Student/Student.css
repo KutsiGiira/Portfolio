@@ -1,8 +1,6 @@
 .tbody{
-    background-color: pink;
     text-align: center;
     height: 40px;
-
     width: 100vw;
 }
 .studentPage{
@@ -11,7 +9,6 @@
     grid-template-rows: 1fr 9fr;
     grid-template-areas:"header""body";
     height: 100vh;
-    background-color: purple;
 }
 .topSection{
     grid-area:header;
@@ -19,7 +16,6 @@
 }
 .bodySection{
     grid-area: body;
-    background-color: pink;
 }
 #butn{
     padding: 20px;
@@ -29,9 +25,11 @@
     background-color:#152259;
     border: none;
     border-radius: 10px;
+    color: white;
 }
 
 #butn:hover{
     background-color:white;
     color: #152259;
+    border: #152259 solid 1px ;
 }

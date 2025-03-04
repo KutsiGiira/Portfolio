@@ -34,13 +34,6 @@ function Student(){
                     <td className="tbody">0530506043</td>
                     <td className="tbody">1bac</td>
                 </tr>
-                <tr>
-                    <td className="tbody">Haytam</td>
-                    <td className="tbody">Black</td>
-                    <td className="tbody">Agadir</td>
-                    <td className="tbody">0530506043</td>
-                    <td className="tbody">1bac</td>
-                </tr>
                 </tbody>
             </table>
             </body>
