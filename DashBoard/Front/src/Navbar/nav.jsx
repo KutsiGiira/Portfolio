@@ -11,7 +11,7 @@ function Nav(){
             <hr />
             <div className="Links">
                     <NavLink to="/" className={({isActive}) => (isActive ? "active" : "Nactive")} id="link">Dashboard</NavLink>
-                    <NavLink to="/student" className={({isActive}) => (isActive ? "active" : "Nactive")} id="link">Students</NavLink>
+                    <NavLink to="/students" className={({isActive}) => (isActive ? "active" : "Nactive")} id="link">Students</NavLink>
                     <NavLink to="/teacher" className={({isActive}) => (isActive ? "active" : "Nactive")} id="link">Teachers</NavLink>
             </div>
         </nav>
