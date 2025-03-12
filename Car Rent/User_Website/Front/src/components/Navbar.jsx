@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import logo from '../assets/logo.png'
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -8,8 +9,8 @@ function Navbar() {
     <nav className="bg-white shadow-md">
       <div className="container-custom py-4">
         <div className="flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-primary">
-            AutoLoc
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="AutoLoc" className="h-12" />
           </Link>
           
           {/* Mobile menu button */}

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import {
   HomeIcon,
   UserGroupIcon,
@@ -21,7 +22,11 @@ function Sidebar() {
   return (
     <div className="w-64 bg-blue-900 text-white shadow-lg">
       <div className="p-4">
-        <h1 className="text-2xl font-bold">Car Rental Admin</h1>
+        <img 
+          src={logo} 
+          alt="logo" 
+          className="w-full h-auto mb-4"
+        />
       </div>
       <nav className="mt-4">
         {navigation.map((item) => {
@@ -44,4 +49,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar
+export default Sidebar;
