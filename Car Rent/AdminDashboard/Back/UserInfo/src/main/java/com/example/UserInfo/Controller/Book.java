@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173" ,"http://localhost:5174"} )
 public class Book {
     @Autowired
     private BookingRepo brepo;
@@ -21,5 +21,6 @@ public class Book {
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
         return brepo.save(bg);
+        //wa9ila aykhsk t3awd entity mn lowl 7it mam9adch dkchi mzyan
     }
 }

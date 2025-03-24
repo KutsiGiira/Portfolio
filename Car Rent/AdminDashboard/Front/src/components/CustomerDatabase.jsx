@@ -4,7 +4,7 @@ function CustomerDatabase() {
   const [customer, setCustomer] = useState([])
 
   useEffect(() =>{
-    fetch("http://localhost:8080/booking")
+    fetch("http://localhost:8080/contact")
     .then(res =>{
       if(!res.ok){
         throw new Error("failure")
@@ -21,7 +21,7 @@ function CustomerDatabase() {
   }, [])
  
 //9ad ports
-
+// had lpage t9adat la biti t9ad ba9i desigh liha 7sn mhm tal db mzyan
   return (
     <div className="p-6">
       <Title>Customer Database</Title>
@@ -35,12 +35,12 @@ function CustomerDatabase() {
           {customer.map((cus) => (
             <div key={cus.id} className="flex items-center justify-between p-4 border-b">
               <div>
-                <Text className="font-medium">{cus.fname} {cus.lname}</Text>
+                <Text className="font-medium">{cus.nom}</Text>
                 <Text className="text-gray-500">{cus.email}</Text>
               </div>
               <div className="flex items-center gap-4">
-                <Text>0{cus.telephone}</Text>
-                <Text className="text-gray-500">Rentals: {cus.rentals} "f"</Text>
+                <Text>{cus.sujet}</Text>
+                <Text className="text-gray-500">Message: {cus.message} "f"</Text>
               </div>
             </div>
           ))}

@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
+    nom: '',
     email: '',
-    subject: '',
+    sujet: '',
     message: ''
   });
   
@@ -30,8 +30,8 @@ function ContactPage() {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.name.trim()) {
-      newErrors.name = "Le nom est requis";
+    if (!formData.nom.trim()) {
+      newErrors.nom = "Le nom est requis";
     }
     
     if (!formData.email.trim()) {
@@ -40,8 +40,8 @@ function ContactPage() {
       newErrors.email = "L'email n'est pas valide";
     }
     
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Le sujet est requis";
+    if (!formData.sujet.trim()) {
+      newErrors.sujet = "Le sujet est requis";
     }
     
     if (!formData.message.trim()) {
@@ -54,18 +54,30 @@ function ContactPage() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+  
     if (validateForm()) {
-      // Simuler l'envoi du formulaire
-      setTimeout(() => {
-        setSubmitted(true);
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
+      // Send form data to the backend
+      fetch("http://localhost:8080/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          setSubmitted(true);
+          setFormData({
+            nom: '',
+            email: '',
+            sujet: '',
+            message: ''
+          });
+          console.log("Form submitted successfully:", data);
+        })
+        .catch(error => {
+          console.error("Error submitting form:", error);
         });
-      }, 1000);
     }
   };
   
@@ -184,13 +196,13 @@ function ContactPage() {
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      id="nom"
+                      name="nom"
+                      value={formData.nom}
                       onChange={handleChange}
-                      className={`w-full border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                      className={`w-full border ${errors.nom ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                     />
-                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.nom}</p>}
                   </div>
                   
                   <div className="mb-4">
@@ -214,13 +226,13 @@ function ContactPage() {
                     </label>
                     <input
                       type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                      id="sujet"
+                      name="sujet"
+                      value={formData.sujet}
                       onChange={handleChange}
-                      className={`w-full border ${errors.subject ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                      className={`w-full border ${errors.sujet ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                     />
-                    {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+                    {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.sujet}</p>}
                   </div>
                   
                   <div className="mb-6">

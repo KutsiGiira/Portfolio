@@ -8,21 +8,21 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nom;
+    private String name;
     private String email;
     private String sujet;
     private String message;
 
-    public Contact(int id, String nom, String email, String sujet, String message) {
+    public Contact(int id, String name, String email, String sujet, String message) {
         this.id = id;
-        this.nom = nom;
+        this.name = name;
         this.email = email;
         this.sujet = sujet;
         this.message = message;
     }
 
-    public Contact(String nom, String email, String sujet, String message) {
-        this.nom = nom;
+    public Contact(String name, String email, String sujet, String message) {
+        this.name = name;
         this.email = email;
         this.sujet = sujet;
         this.message = message;
@@ -40,11 +40,11 @@ public class Contact {
     }
 
     public String getNom() {
-        return nom;
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -75,7 +75,7 @@ public class Contact {
     public String toString() {
         return "Contact{" +
                 "id=" + id +
-                ", nom='" + nom + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", sujet='" + sujet + '\'' +
                 ", message='" + message + '\'' +

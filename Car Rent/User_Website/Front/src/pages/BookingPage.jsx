@@ -8,21 +8,22 @@ function BookingPage() {
   const car = cars.find(car => car.id === parseInt(id));
   
   const [formData, setFormData] = useState({
-    // startDate: '',
-    // endDate: '',
+    startDate: '',
+    endDate: '',
     firstName: '',
-    lastName: ''
-    // email: '',
-    // phone: '',
-    // address: '',
-    // city: '',
-    // zipCode: '',
-    // driverLicense: '',
-    // agreeTerms: false
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    driverLicense: '',
+    agreeTerms: false
   });
   
   const [errors, setErrors] = useState({});
-  
+  const [submitted, setSubmitted] = useState(false);
+
   if (!car) {
     return (
       <div className="container-custom py-16 text-center">
@@ -107,13 +108,37 @@ function BookingPage() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+  //9ad lform bach itsaft l backend
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const carInfo = {
-
-      
+    if (validateForm()) {
+        fetch('http://localhost:8080/booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+          setSubmitted(true);
+          setFormData({
+            startDate: '',
+            endDate: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            address: '',
+            city: '',
+            zipCode: '',
+            driverLicense: ''
+          });
+          console.log("Form submitted successfully:", data);
+        })
+        .catch(error => {
+          console.error("Error submitting form:", error);
+        });
     }
 
     if (validateForm()) {
@@ -165,7 +190,7 @@ function BookingPage() {
               <h2 className="text-xl font-semibold mb-6">Informations de réservation</h2>
               
               {/* Dates */}
-              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-1">
                     Date de début *
@@ -197,7 +222,7 @@ function BookingPage() {
                   />
                   {errors.endDate && <p className="text-red-500 text-sm mt-1">{errors.endDate}</p>}
                 </div>
-              </div> */}
+              </div>
               
               <h2 className="text-xl font-semibold mb-6">Informations personnelles</h2>
               
@@ -235,7 +260,7 @@ function BookingPage() {
               </div>
               
               {/* Email et téléphone */}
-              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Email *
@@ -265,10 +290,10 @@ function BookingPage() {
                   />
                   {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                 </div>
-              </div> */}
+              </div>
               
               {/* Adresse */}
-              {/* <div className="mb-4">
+              <div className="mb-4">
                 <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                   Adresse
                 </label>
@@ -280,10 +305,10 @@ function BookingPage() {
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md p-2"
                 />
-              </div> */}
+              </div>
               
               {/* Ville et code postal */}
-              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
                     Ville
@@ -311,10 +336,10 @@ function BookingPage() {
                     className="w-full border border-gray-300 rounded-md p-2"
                   />
                 </div>
-              </div> */}
+              </div>
               
               {/* Permis de conduire */}
-              {/* <div className="mb-6">
+              <div className="mb-6">
                 <label htmlFor="driverLicense" className="block text-sm font-medium text-gray-700 mb-1">
                   Numéro de permis de conduire *
                 </label>
@@ -327,10 +352,10 @@ function BookingPage() {
                   className={`w-full border ${errors.driverLicense ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                 />
                 {errors.driverLicense && <p className="text-red-500 text-sm mt-1">{errors.driverLicense}</p>}
-              </div> */}
+              </div>
               
               {/* Conditions */}
-              {/* <div className="mb-6">
+              <div className="mb-6">
                 <div className="flex items-start">
                   <input
                     type="checkbox"
@@ -345,9 +370,9 @@ function BookingPage() {
                   </label>
                 </div>
                 {errors.agreeTerms && <p className="text-red-500 text-sm mt-1">{errors.agreeTerms}</p>}
-              </div> */}
+              </div>
               
-              <button type="submit" className="btn w-full">
+              <button type="submit" className="btn w-full" onClick={() => setSubmitted(false)}>
                 Confirmer la réservation
               </button>
             </form>
