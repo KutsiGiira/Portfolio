@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { Card, Title, Text, Button, TextInput, Select, SelectItem } from '@tremor/react';
-
+import AddNewCar from './AddNewCar';
 function CarManagement() {
   const [cars, setCars] = useState([
     { id: 1, name: 'Toyota Camry', type: 'Sedan', status: 'available', price: 50 },
     { id: 2, name: 'Honda CR-V', type: 'SUV', status: 'rented', price: 65 },
   ]);
 
+  const [AddVis, SetVis] = useState("none")
+  function Show(){
+    SetVis("block");
+  }
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <Title>Car Management</Title>
-        <Button>Add New Car</Button>
+        <Button onClick={Show}>Add New Car</Button>
+        <div style={{ display: AddVis }}>
+      <AddNewCar />
+    </div>
       </div>
 
       <Card>

@@ -5,6 +5,7 @@ import CarManagement from './components/CarManagement';
 import BookingManagement from './components/BookingManagement';
 import CustomerDatabase from './components/CustomerDatabase';
 import Reports from './components/Reports';
+import AddNewCar from './components/AddNewCar';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/bookings" element={<BookingManagement />} />
             <Route path="/customers" element={<CustomerDatabase />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/form" element={<AddNewCar />} />
           </Routes>
         </div>
       </div>
