@@ -1,99 +1,52 @@
 import React, { useState } from 'react';
+import CarManagement from './CarManagement';
 import { PlusOutlined } from '@ant-design/icons';
 import {
-  Button,
-  Cascader,
-  Checkbox,
-  ColorPicker,
   DatePicker,
   Form,
   Input,
+  Button,
   InputNumber,
-  Radio,
-  Rate,
-  Select,
-  Slider,
-  Switch,
-  TreeSelect,
-  Upload,
+  Upload
 } from 'antd';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
+
 const normFile = e => {
   if (Array.isArray(e)) {
     return e;
   }
   return e === null || e === void 0 ? void 0 : e.fileList;
 };
-const NewCar = () => {
-  const [componentDisabled, setComponentDisabled] = useState(true);
+function NewCar({ onClose }){
   return (
-    <>
-      <Checkbox checked={componentDisabled} onChange={e => setComponentDisabled(e.target.checked)}>
-        Form disabled
-      </Checkbox>
+    <div style={{zIndex: 2,
+      position: "absolute", 
+      left:"50%", 
+      transform:"translateX(-50%)",
+      borderRadius:"20px",
+      color: "white"}} 
+      className="flex-1 overflow-auto bg-blue-900" >
       <Form
-        labelCol={{ span: 4 }}
+        labelCol={{ span: 3 }}
         wrapperCol={{ span: 14 }}
-        layout="horizontal"
-        disabled={componentDisabled}
-        style={{ maxWidth: 600 }}
+        style={{ minWidth: 900}}
       >
-        <Form.Item label="Checkbox" name="disabled" valuePropName="checked">
-          <Checkbox>Checkbox</Checkbox>
-        </Form.Item>
-        <Form.Item label="Radio">
-          <Radio.Group>
-            <Radio value="apple"> Apple </Radio>
-            <Radio value="pear"> Pear </Radio>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Input">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="TreeSelect">
-          <TreeSelect
-            treeData={[
-              { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="Cascader">
-          <Cascader
-            options={[
-              {
-                value: 'zhejiang',
-                label: 'Zhejiang',
-                children: [
-                  {
-                    value: 'hangzhou',
-                    label: 'Hangzhou',
-                  },
-                ],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="DatePicker">
-          <DatePicker />
-        </Form.Item>
-        <Form.Item label="RangePicker">
-          <RangePicker />
-        </Form.Item>
-        <Form.Item label="InputNumber">
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label="TextArea">
-          <TextArea rows={4} />
-        </Form.Item>
-        <Form.Item label="Switch" valuePropName="checked">
-          <Switch />
-        </Form.Item>
+      <Form.Item>
+      <Button
+            style={{
+              position: "absolute",
+              left: "160%",
+              border: "none",
+              borderRadius: "100px",
+              backgroundColor: "#f00",
+              color: "#fff",
+            }}
+            onClick={onClose}
+          >
+            X
+          </Button>      
+      </Form.Item>
         <Form.Item label="Upload" valuePropName="fileList" getValueFromEvent={normFile}>
           <Upload action="/upload.do" listType="picture-card">
             <button
@@ -101,24 +54,54 @@ const NewCar = () => {
               type="button"
             >
               <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
+              <div>Car Pic</div>
             </button>
           </Upload>
         </Form.Item>
-        <Form.Item label="Button">
-          <Button>Button</Button>
+        <Form.Item label="Car Name : ">
+          <Input placeholder='Car Name' />
         </Form.Item>
-        <Form.Item label="Slider">
-          <Slider />
+        <Form.Item label="Price">
+          <InputNumber placeholder='price' />
         </Form.Item>
-        <Form.Item label="ColorPicker">
-          <ColorPicker />
+        <Form.Item label="Available ">
+          <RangePicker />
         </Form.Item>
-        <Form.Item label="Rate">
-          <Rate />
+        <Form.Item label="InputNumber ">
+          <InputNumber />
         </Form.Item>
+        <Form.Item label="description">
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item label="transmition">
+          <select name="transmition" id="transmition">
+            <option value="Automatique">Automatique</option>
+            <option value="Manuel">Manuel</option>
+          </select>
+        </Form.Item>
+        <Form.Item label="Categories">
+          <select name="Categories" id="Categories">
+            <option value="Suv">Suv</option>
+            <option value="Compacte">Compacte</option>
+            <option value="Electrique">Electrique</option>
+            <option value="Berline">Berline</option>
+          </select>
+        </Form.Item>
+        <Form.Item label="Carburant">
+          <select name="Carburant" id="Carburant">
+            <option value="Essence">Essence</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Elec">Electrique</option>
+          </select>
+        </Form.Item>
+        <Form.Item label="Caracteristique">
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item>
+        <Button style={{position: "absolute", left:"80%", border:"none", borderRadius:"100px"}}>Sumbit</Button>
+      </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 export default () => <NewCar />;

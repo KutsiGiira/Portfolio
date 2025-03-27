@@ -11,18 +11,21 @@ function CarManagement() {
   function Show(){
     SetVis("block");
   }
+  function shut(){
+    alert("Clicked")
+  }
   return (
-    <div className="p-6">
+    <div className="p-6" style={{zIndex: 1}}>
       <div className="flex justify-between items-center mb-6">
         <Title>Car Management</Title>
-        <Button onClick={Show}>Add New Car</Button>
-        <div style={{ display: AddVis }}>
-      <AddNewCar />
+        <Button onClick={Show} style={{position: 'absolute', left: "90%"}}>Add New Car</Button>
+        <div style={{ display: AddVis }} >
+      <AddNewCar onClick={shut}/>
     </div>
       </div>
 
       <Card>
-        <div className="space-y-4">
+        <div className="space-y-4" >
           {cars.map((car) => (
             <div key={car.id} className="flex items-center justify-between p-4 border-b">
               <div>
