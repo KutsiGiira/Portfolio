@@ -16,7 +16,7 @@ public class Book {
     private BookingRepo brepo;
     @GetMapping("/booking")
     public List<Booking> book(){
-        return  brepo.findAll();
+        return brepo.findAll();
     }
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
