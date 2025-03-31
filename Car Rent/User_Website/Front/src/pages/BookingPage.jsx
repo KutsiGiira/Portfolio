@@ -6,21 +6,21 @@ function BookingPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const car = cars.find(car => car.id === parseInt(id));
-  
+//9AD TELEPHONE RAH MAMLINKYACH JRB TBDLHA F BACKEND HUWA LOWL
   const [formData, setFormData] = useState({
-    startDate: '',
-    endDate: '',
-    firstName: '',
-    lastName: '',
+    start_date: '',
+    end_date: '',
+    fname: '',
+    lname: '',
     email: '',
     phone: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    driverLicense: '',
+    adresse: '',
+    ville: '',
+    code_postal: '',
+    permis_number: '',
     agreeTerms: false
   });
-  
+
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -29,33 +29,28 @@ function BookingPage() {
       <div className="container-custom py-16 text-center">
         <h2 className="text-2xl font-bold mb-4">Voiture non trouvée</h2>
         <p className="mb-8">La voiture que vous recherchez n'existe pas.</p>
-        <Link to="/cars" className="btn">
-          Retour à la liste des voitures
-        </Link>
+        <Link to="/cars" className="btn">Retour à la liste des voitures</Link>
       </div>
     );
   }
-  
+
   if (!car.available) {
     return (
       <div className="container-custom py-16 text-center">
         <h2 className="text-2xl font-bold mb-4">Voiture indisponible</h2>
         <p className="mb-8">Cette voiture n'est pas disponible à la location actuellement.</p>
-        <Link to="/cars" className="btn">
-          Voir d'autres voitures
-        </Link>
+        <Link to="/cars" className="btn">Voir d'autres voitures</Link>
       </div>
     );
   }
-  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    
-    // Effacer l'erreur lorsque l'utilisateur modifie le champ
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -63,104 +58,93 @@ function BookingPage() {
       }));
     }
   };
-  
-  const validateForm = () => {
-    const newErrors = {};
-    
-    // Validation des dates
-    if (!formData.startDate) {
-      newErrors.startDate = "La date de début est requise";
-    }
-    
-    if (!formData.endDate) {
-      newErrors.endDate = "La date de fin est requise";
-    } else if (formData.startDate && new Date(formData.endDate) <= new Date(formData.startDate)) {
-      newErrors.endDate = "La date de fin doit être après la date de début";
-    }
-    
-    // Validation des informations personnelles
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "Le prénom est requis";
-    }
-    
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Le nom est requis";
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = "L'email est requis";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "L'email n'est pas valide";
-    }
-    
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Le téléphone est requis";
-    }
-    
-    if (!formData.driverLicense.trim()) {
-      newErrors.driverLicense = "Le numéro de permis est requis";
-    }
-    
-    if (!formData.agreeTerms) {
-      newErrors.agreeTerms = "Vous devez accepter les conditions";
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-  //9ad lform bach itsaft l backend
+
+  // const validateForm = () => {
+  //   const newErrors = {};
+
+  //   if (!formData.start_date) {
+  //     newErrors.start_date = "La date de début est requise";
+  //   }
+
+  //   if (!formData.end_date) {
+  //     newErrors.end_date = "La date de fin est requise";
+  //   } else if (formData.start_date && new Date(formData.end_date) <= new Date(formData.start_date)) {
+  //     newErrors.end_date = "La date de fin doit être après la date de début";
+  //   }
+
+  //   if (!formData.fname.trim()) {
+  //     newErrors.fname = "Le prénom est requis";
+  //   }
+
+  //   if (!formData.lname.trim()) {
+  //     newErrors.lname = "Le nom est requis";
+  //   }
+
+  //   if (!formData.email.trim()) {
+  //     newErrors.email = "L'email est requis";
+  //   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+  //     newErrors.email = "L'email n'est pas valide";
+  //   }
+
+  //   if (!formData.phone.trim()) {
+  //     newErrors.phone = "Le téléphone est requis";
+  //   } else if (!/^\+?[0-9\s-]+$/.test(formData.phone)) {
+  //     newErrors.phone = "Numéro de téléphone invalide";
+  //   }
+
+  //   if (!formData.permis_number.trim()) {
+  //     newErrors.permis_number = "Le numéro de permis est requis";
+  //   }
+
+  //   if (!formData.agreeTerms) {
+  //     newErrors.agreeTerms = "Vous devez accepter les conditions";
+  //   }
+
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-        fetch('http://localhost:8080/booking', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
+    // if (validateForm())
+      //  {
+      fetch('http://localhost:8080/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
         .then(response => response.json())
         .then(data => {
           setSubmitted(true);
           setFormData({
-            startDate: '',
-            endDate: '',
-            firstName: '',
-            lastName: '',
+            start_date: '',
+            end_date: '',
+            fname: '',
+            lname: '',
             email: '',
             phone: '',
-            address: '',
-            city: '',
-            zipCode: '',
-            driverLicense: ''
+            adresse: '',
+            ville: '',
+            code_postal: '',
+            permis_number: '',
+            agreeTerms: false
           });
-          console.log("Form submitted successfully:", data);
+          console.log("data sent", data)
+          navigate('/');
         })
         .catch(error => {
           console.error("Error submitting form:", error);
+          alert("Une erreur s'est produite lors de la réservation.");
         });
-    }
-
-    if (validateForm()) {
-      // Calculer le nombre de jours
-      const startDate = new Date(formData.startDate);
-      const endDate = new Date(formData.endDate);
-      const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-      
-      // Simuler une réservation réussie
-      alert(`Réservation confirmée pour ${car.name} du ${formData.startDate} au ${formData.endDate}. Montant total: ${days * car.price}€`);
-      navigate('/');
-    }
+    // }
   };
-  
-  // Calculer le prix total si les dates sont valides
+
   const calculateTotal = () => {
-    if (formData.startDate && formData.endDate) {
-      const startDate = new Date(formData.startDate);
-      const endDate = new Date(formData.endDate);
-      
-      if (endDate > startDate) {
-        const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+    if (formData.start_date && formData.end_date) {
+      const start_date = new Date(formData.start_date);
+      const end_date = new Date(formData.end_date);
+      if (end_date > start_date) {
+        const days = Math.ceil((end_date - start_date) / (1000 * 60 * 60 * 24));
         return days * car.price;
       }
     }
@@ -192,35 +176,35 @@ function BookingPage() {
               {/* Dates */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="start_date" className="block text-sm font-medium text-gray-700 mb-1">
                     Date de début *
                   </label>
                   <input
                     type="date"
-                    id="startDate"
-                    name="startDate"
-                    value={formData.startDate}
+                    id="start_date"
+                    name="start_date"
+                    value={formData.start_date}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className={`w-full border ${errors.startDate ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                    className={`w-full border ${errors.start_date ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                   />
-                  {errors.startDate && <p className="text-red-500 text-sm mt-1">{errors.startDate}</p>}
+                  {errors.start_date && <p className="text-red-500 text-sm mt-1">{errors.start_date}</p>}
                 </div>
                 
                 <div>
-                  <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="end_date" className="block text-sm font-medium text-gray-700 mb-1">
                     Date de fin *
                   </label>
                   <input
                     type="date"
-                    id="endDate"
-                    name="endDate"
-                    value={formData.endDate}
+                    id="end_date"
+                    name="end_date"
+                    value={formData.end_date}
                     onChange={handleChange}
-                    min={formData.startDate || new Date().toISOString().split('T')[0]}
-                    className={`w-full border ${errors.endDate ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                    min={formData.start_date || new Date().toISOString().split('T')[0]}
+                    className={`w-full border ${errors.end_date ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                   />
-                  {errors.endDate && <p className="text-red-500 text-sm mt-1">{errors.endDate}</p>}
+                  {errors.end_date && <p className="text-red-500 text-sm mt-1">{errors.end_date}</p>}
                 </div>
               </div>
               
@@ -229,33 +213,33 @@ function BookingPage() {
               {/* Nom et prénom */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="fname" className="block text-sm font-medium text-gray-700 mb-1">
                     Prénom *
                   </label>
                   <input
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    id="fname"
+                    name="fname"
+                    value={formData.fname}
                     onChange={handleChange}
-                    className={`w-full border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                    className={`w-full border ${errors.fname ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                   />
-                  {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+                  {errors.fname && <p className="text-red-500 text-sm mt-1">{errors.fname}</p>}
                 </div>
                 
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="lname" className="block text-sm font-medium text-gray-700 mb-1">
                     Nom *
                   </label>
                   <input
                     type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
+                    id="lname"
+                    name="lname"
+                    value={formData.lname}
                     onChange={handleChange}
-                    className={`w-full border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                    className={`w-full border ${errors.lname ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                   />
-                  {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+                  {errors.lname && <p className="text-red-500 text-sm mt-1">{errors.lname}</p>}
                 </div>
               </div>
               
@@ -294,14 +278,14 @@ function BookingPage() {
               
               {/* Adresse */}
               <div className="mb-4">
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="adresse" className="block text-sm font-medium text-gray-700 mb-1">
                   Adresse
                 </label>
                 <input
                   type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
+                  id="adresse"
+                  name="adresse"
+                  value={formData.adresse}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md p-2"
                 />
@@ -310,28 +294,28 @@ function BookingPage() {
               {/* Ville et code postal */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="ville" className="block text-sm font-medium text-gray-700 mb-1">
                     Ville
                   </label>
                   <input
                     type="text"
-                    id="city"
-                    name="city"
-                    value={formData.city}
+                    id="ville"
+                    name="ville"
+                    value={formData.ville}
                     onChange={handleChange}
                     className="w-full border border-gray-300 rounded-md p-2"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="code_postal" className="block text-sm font-medium text-gray-700 mb-1">
                     Code postal
                   </label>
                   <input
                     type="text"
-                    id="zipCode"
-                    name="zipCode"
-                    value={formData.zipCode}
+                    id="code_postal"
+                    name="code_postal"
+                    value={formData.code_postal}
                     onChange={handleChange}
                     className="w-full border border-gray-300 rounded-md p-2"
                   />
@@ -340,18 +324,18 @@ function BookingPage() {
               
               {/* Permis de conduire */}
               <div className="mb-6">
-                <label htmlFor="driverLicense" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="permis_number" className="block text-sm font-medium text-gray-700 mb-1">
                   Numéro de permis de conduire *
                 </label>
                 <input
                   type="text"
-                  id="driverLicense"
-                  name="driverLicense"
-                  value={formData.driverLicense}
+                  id="permis_number"
+                  name="permis_number"
+                  value={formData.permis_number}
                   onChange={handleChange}
-                  className={`w-full border ${errors.driverLicense ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
+                  className={`w-full border ${errors.permis_number ? 'border-red-500' : 'border-gray-300'} rounded-md p-2`}
                 />
-                {errors.driverLicense && <p className="text-red-500 text-sm mt-1">{errors.driverLicense}</p>}
+                {errors.permis_number && <p className="text-red-500 text-sm mt-1">{errors.permis_number}</p>}
               </div>
               
               {/* Conditions */}
@@ -401,10 +385,10 @@ function BookingPage() {
                   <span>{car.price}€</span>
                 </div>
                 
-                {formData.startDate && formData.endDate && new Date(formData.endDate) > new Date(formData.startDate) && (
+                {formData.start_date && formData.end_date && new Date(formData.end_date) > new Date(formData.start_date) && (
                   <div className="flex justify-between mb-2">
                     <span className="text-gray-600">Nombre de jours:</span>
-                    <span>{Math.ceil((new Date(formData.endDate) - new Date(formData.startDate)) / (1000 * 60 * 60 * 24))}</span>
+                    <span>{Math.ceil((new Date(formData.end_date) - new Date(formData.start_date)) / (1000 * 60 * 60 * 24))}</span>
                   </div>
                 )}
               </div>
