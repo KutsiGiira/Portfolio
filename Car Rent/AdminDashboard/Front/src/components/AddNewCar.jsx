@@ -18,15 +18,16 @@ const normFile = e => {
   }
   return e === null || e === void 0 ? void 0 : e.fileList;
 };
-function NewCar({ onClose }){
+function NewCar({style, onClose}){
   return (
     <div style={{zIndex: 2,
       position: "absolute", 
       left:"50%", 
       transform:"translateX(-50%)",
       borderRadius:"20px",
-      color: "white"}} 
-      className="flex-1 overflow-auto bg-blue-900" >
+      color: "white",
+    display:{style} }} 
+      className="flex-1 overflow-auto bg-blue-900">
       <Form
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 14 }}
@@ -68,6 +69,7 @@ function NewCar({ onClose }){
           <RangePicker />
         </Form.Item>
         <Form.Item label="InputNumber ">
+          {/* ??????? chnohadchi ??????*/}
           <InputNumber />
         </Form.Item>
         <Form.Item label="description">

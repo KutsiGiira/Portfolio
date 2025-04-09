@@ -7,21 +7,21 @@ function CarManagement() {
     { id: 2, name: 'Honda CR-V', type: 'SUV', status: 'rented', price: 65 },
   ]);
 
-  const [AddVis, SetVis] = useState("none")
-  function Show(){
-    SetVis("block");
+
+const [FormVis, setFormVis] = useState("none")
+  function open(){
+    setFormVis("block")
   }
-  function shut(){
-    alert("Clicked")
+  function close(){
+    setFormVis("none")
   }
-  //9AD LBUTTON DYAL LFORM RAH MAKATSDCH
   return (
     <div className="p-6" style={{zIndex: 1}}>
       <div className="flex justify-between items-center mb-6">
         <Title>Car Management</Title>
-        <Button onClick={Show} style={{position: 'absolute', left: "90%"}}>Add New Car</Button>
-        <div style={{ display: AddVis }} >
-      <AddNewCar onClick={shut}/>
+        <Button style={{position: 'absolute', left: "90%"}} onClick={open}>Add New Car</Button>
+        <div>
+        <AddNewCar onClose={close} style={{display: FormVis}}/>
     </div>
       </div>
 
