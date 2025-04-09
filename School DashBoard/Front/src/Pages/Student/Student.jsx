@@ -10,7 +10,7 @@ function Student(){
     const [students, setStudents] = useState([]);
     const heads = ["Fist name", "Last name", "Address", "Phone number", "Class"];
     useEffect(() => {
-        fetch("http://localhost:8080/students")
+        fetch("http://localhost:8000/students")
           .then(response => {
             if (!response.ok) {
               throw new Error("Failed to fetch data");
@@ -30,7 +30,7 @@ function Student(){
       const deletestudent = (id) => {
         const isConfirmed = window.confirm("Are you sure you want to delete this student?");
         if(isConfirmed){
-            fetch(`http://localhost:8080/students/${id}`, {
+            fetch(`http://localhost:8000/students/${id}`, {
                 method: "DELETE",
               })
               .then(response => {
@@ -66,7 +66,7 @@ function Student(){
                 </thead>
                 <tbody>
                     {students.map(st => (
-                        <tr key={st.id} style={{color:"red"}}>
+                        <tr key={st.id}>
                         <td className="tbody">{st.first_Name}</td>
                         <td className="tbody">{st.last_Name}</td>
                         <td className="tbody">{st.address}</td>

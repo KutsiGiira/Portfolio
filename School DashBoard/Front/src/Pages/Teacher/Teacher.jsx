@@ -5,7 +5,7 @@ function Teacher(){
     const [Top, Tset] = useState("none")
     const [teacher, setTeacher] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8080/teachers")
+        fetch("http://localhost:8000/teachers")
         .then(response => {
             if(!response.ok){
                 throw new Error("failed to fetch data")

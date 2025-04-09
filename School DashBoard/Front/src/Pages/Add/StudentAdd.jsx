@@ -19,7 +19,7 @@ function AddStudent({ style, onClose }) {
             phone_number: num,
             class: classe,
         };
-        fetch("http://localhost:8080/students", {
+        fetch("http://localhost:8000/students", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

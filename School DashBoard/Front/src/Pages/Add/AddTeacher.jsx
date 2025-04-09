@@ -20,7 +20,7 @@ function AddTeacher({style, onClose}){
                 class: cls,
                 cin: cin,
                 };
-                fetch("http://localhost:8080/teachers", {
+                fetch("http://localhost:8000/teachers", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -36,7 +36,7 @@ function AddTeacher({style, onClose}){
                     console.log("Error:", error);
                 });
             };
-            
+            //chi 7aja hna rah makhdamach m3a dik class wla chi 7aja b7al hkk muhim 3awd tel w rah bdelt port make sure mbdel f klch
     return(
         <main className='frm' style={style}>
              <img src={close} alt="close" onClick={onClose} id="x"/>
