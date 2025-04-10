@@ -30,6 +30,7 @@ function BookingManagement() {
             <div key={cus.id} className="flex items-center justify-between p-4 border-b">
               <div>
                 <Text className="font-medium">{cus.fname +" "+ cus.lname}</Text>
+                <Text className="font-small">{cus.phone}</Text>
                 <Text className="text-gray-500">car to rent</Text>
               </div>
               <div className="flex items-center gap-4">

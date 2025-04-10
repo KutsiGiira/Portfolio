@@ -6,7 +6,6 @@ function BookingPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const car = cars.find(car => car.id === parseInt(id));
-//9AD TELEPHONE RAH MAMLINKYACH JRB TBDLHA F BACKEND HUWA LOWL
   const [formData, setFormData] = useState({
     start_date: '',
     end_date: '',
@@ -265,7 +264,7 @@ function BookingPage() {
                     Téléphone *
                   </label>
                   <input
-                    type="tel"
+                    type="text"
                     id="phone"
                     name="phone"
                     value={formData.phone}

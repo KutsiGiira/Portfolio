@@ -56,6 +56,7 @@ function NewCar({style, onClose}){
             >
               <PlusOutlined />
               <div>Car Pic</div>
+              {/* mazl makaduz l backend */}
             </button>
           </Upload>
         </Form.Item>
@@ -65,12 +66,11 @@ function NewCar({style, onClose}){
         <Form.Item label="Price">
           <InputNumber placeholder='price' />
         </Form.Item>
-        <Form.Item label="Available ">
-          <RangePicker />
-        </Form.Item>
-        <Form.Item label="InputNumber ">
-          {/* ??????? chnohadchi ??????*/}
-          <InputNumber />
+        <Form.Item label="Status ">
+        <select name="Status" id="Status">
+            <option value="Available">Available</option>
+            <option value="Rented">Rented</option>
+          </select>
         </Form.Item>
         <Form.Item label="description">
           <TextArea rows={4} />
@@ -86,7 +86,6 @@ function NewCar({style, onClose}){
             <option value="Suv">Suv</option>
             <option value="Compacte">Compacte</option>
             <option value="Electrique">Electrique</option>
-            <option value="Berline">Berline</option>
           </select>
         </Form.Item>
         <Form.Item label="Carburant">

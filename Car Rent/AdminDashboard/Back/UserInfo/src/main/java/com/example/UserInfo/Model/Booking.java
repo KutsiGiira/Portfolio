@@ -15,33 +15,33 @@ public class Booking {
     private String fname;
     private String lname;
     private String email;
-    private int telephone;
+    private String phone;
     private String address;
     private String ville;
     private int code_postal;
     private int permis_number;
 
-    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, int telephone, String address, String ville, int code_postal, int permis_number) {
+    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
-        this.telephone = telephone;
+        this.phone = phone;
         this.address = address;
         this.ville = ville;
         this.code_postal = code_postal;
         this.permis_number = permis_number;
     }
 
-    public Booking(Date start_date, Date end_date, String fname, String lname, String email, int telephone, String address, String ville, int code_postal, int permis_number) {
+    public Booking(Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
-        this.telephone = telephone;
+        this.phone = phone;
         this.address = address;
         this.ville = ville;
         this.code_postal = code_postal;
@@ -99,12 +99,12 @@ public class Booking {
         this.email = email;
     }
 
-    public int getTelephone() {
-        return telephone;
+    public String getphone() {
+        return phone;
     }
 
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
+    public void setphone(String phone) {
+        this.phone = phone;
     }
 
     public String getAdresse() {
@@ -148,7 +148,7 @@ public class Booking {
                 ", fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
                 ", email='" + email + '\'' +
-                ", telephone=" + telephone +
+                ", phone=" + phone +
                 ", address='" + address + '\'' +
                 ", ville='" + ville + '\'' +
                 ", code_postal=" + code_postal +
