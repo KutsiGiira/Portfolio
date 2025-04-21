@@ -1,12 +1,10 @@
 package com.example.UserInfo.Controller;
 
+import com.example.UserInfo.Model.Booking;
 import com.example.UserInfo.Model.Car;
 import com.example.UserInfo.Model.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,13 @@ import java.util.List;
 public class CarCont {
     @Autowired
     public CarRepo carrepo;
+
     @GetMapping("/cars")
-    public List<Car> cars(){
+    public List<Car> cars() {
         return carrepo.findAll();
+    }
+    @PostMapping("/cars")
+    public Car carPost(@RequestBody Car car) {
+        return carrepo.save(car);
     }
 }

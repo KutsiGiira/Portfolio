@@ -21,6 +21,5 @@ public class Book {
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
         return brepo.save(bg);
-        //wa9ila aykhsk t3awd entity mn lowl 7it mam9adch dkchi mzyan
     }
 }

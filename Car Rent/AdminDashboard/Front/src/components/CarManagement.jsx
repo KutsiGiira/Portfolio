@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Card, Title, Text, Button, TextInput, Select, SelectItem } from '@tremor/react';
 import AddNewCar from './AddNewCar';
 function CarManagement() {
-  const [cars, setCars] = useState([
-    { id: 1, name: 'Toyota Camry', type: 'Sedan', status: 'available', price: 50 },
-    { id: 2, name: 'Honda CR-V', type: 'SUV', status: 'rented', price: 65 },
-  ]);
+  const [cars, setCars] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8080/cars')
+      .then(res => res.json())
+      .then(data => setCars(data))
+      .catch(err => console.error('Error fetching cars:', err));
+  }, []);
 
 
 const [FormVis, setFormVis] = useState("none")
@@ -35,7 +38,7 @@ const [FormVis, setFormVis] = useState("none")
               </div>
               <div className="flex items-center gap-4">
                 <span className={`px-2 py-1 rounded ${
-                  car.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  car.status === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                 }`}>
                   {car.status}
                 </span>

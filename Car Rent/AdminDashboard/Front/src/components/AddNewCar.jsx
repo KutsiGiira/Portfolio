@@ -1,40 +1,67 @@
 import React, { useState } from 'react';
-import CarManagement from './CarManagement';
 import { PlusOutlined } from '@ant-design/icons';
-import {
-  DatePicker,
-  Form,
-  Input,
-  Button,
-  InputNumber,
-  Upload
-} from 'antd';
-const { RangePicker } = DatePicker;
+import { Form, Input, Button, InputNumber, Upload, message, Select } from 'antd';
+
 const { TextArea } = Input;
 
-const normFile = e => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e === null || e === void 0 ? void 0 : e.fileList;
-};
-function NewCar({style, onClose}){
+const NewCar = ({ style, onClose }) => {
+  const [carList, setCarList] = useState([
+    {
+      // image: '',
+      name: '',
+      price: '',
+      status: '',
+      description: '',
+      transmition: '',
+      categories: '',
+      carburant: '',
+      caracteristique: ''
+    }
+  ]);
+//chi 7aja mam9adch m3a lfront 7it makaybich i9ra db
+
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedList = [...carList];
+    updatedList[index][name] = value;
+    setCarList(updatedList);
+  };
+
+  const handleSubmit = (values) => {
+    carList.forEach(car => {
+      fetch('http://localhost:8080/cars', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(car),
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Car added:', data);
+          message.success('Car added successfully');
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          message.error('Error adding car');
+        });
+    });
+  };
+
   return (
-    <div style={{zIndex: 2,
-      position: "absolute", 
-      left:"50%", 
-      transform:"translateX(-50%)",
-      borderRadius:"20px",
+    <div style={{
+      zIndex: 2,
+      position: "absolute",
+      left: "50%",
+      transform: "translateX(-50%)",
+      borderRadius: "20px",
       color: "white",
-    display:{style} }} 
-      className="flex-1 overflow-auto bg-blue-900">
-      <Form
-        labelCol={{ span: 3 }}
-        wrapperCol={{ span: 14 }}
-        style={{ minWidth: 900}}
-      >
-      <Form.Item>
-      <Button
+      display: style
+    }} className="flex-1 overflow-auto bg-blue-900">
+
+      <Form onFinish={handleSubmit} labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900 }}>
+        <Form.Item>
+          <Button
             style={{
               position: "absolute",
               left: "160%",
@@ -46,63 +73,118 @@ function NewCar({style, onClose}){
             onClick={onClose}
           >
             X
-          </Button>      
-      </Form.Item>
-        <Form.Item label="Upload" valuePropName="fileList" getValueFromEvent={normFile}>
-          <Upload action="/upload.do" listType="picture-card">
+          </Button>
+        </Form.Item>
+
+        {/* <Form.Item label="Upload" valuePropName="fileList">
+          <Upload action="http://localhost:8080/cars/ups" listType="picture-card">
             <button
               style={{ color: 'inherit', cursor: 'inherit', border: 0, background: 'none' }}
               type="button"
             >
               <PlusOutlined />
               <div>Car Pic</div>
-              {/* mazl makaduz l backend */}
             </button>
           </Upload>
-        </Form.Item>
-        <Form.Item label="Car Name : ">
-          <Input placeholder='Car Name' />
-        </Form.Item>
-        <Form.Item label="Price">
-          <InputNumber placeholder='price' />
-        </Form.Item>
-        <Form.Item label="Status ">
-        <select name="Status" id="Status">
-            <option value="Available">Available</option>
-            <option value="Rented">Rented</option>
-          </select>
-        </Form.Item>
-        <Form.Item label="description">
-          <TextArea rows={4} />
-        </Form.Item>
-        <Form.Item label="transmition">
-          <select name="transmition" id="transmition">
-            <option value="Automatique">Automatique</option>
-            <option value="Manuel">Manuel</option>
-          </select>
-        </Form.Item>
-        <Form.Item label="Categories">
-          <select name="Categories" id="Categories">
-            <option value="Suv">Suv</option>
-            <option value="Compacte">Compacte</option>
-            <option value="Electrique">Electrique</option>
-          </select>
-        </Form.Item>
-        <Form.Item label="Carburant">
-          <select name="Carburant" id="Carburant">
-            <option value="Essence">Essence</option>
-            <option value="Diesel">Diesel</option>
-            <option value="Elec">Electrique</option>
-          </select>
-        </Form.Item>
-        <Form.Item label="Caracteristique">
-          <TextArea rows={4} />
-        </Form.Item>
+        </Form.Item> */}
+
+        {carList.map((car, index) => (
+          <div key={index}>
+            <Form.Item label="Car Name :">
+              <Input
+                name="name"
+                value={car.name}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Car Name"
+              />
+            </Form.Item>
+
+            <Form.Item label="Price">
+              <InputNumber
+                name="price"
+                value={car.price}
+                onChange={(value) => handleChange({ target: { name: 'price', value } }, index)}
+                placeholder="Price"
+              />
+            </Form.Item>
+
+            <Form.Item label="Status">
+              <Select
+                name="status"
+                value={car.status}
+                onChange={(value) => handleChange({ target: { name: 'status', value } }, index)}
+              >
+                <Select.Option value="Available">Available</Select.Option>
+                <Select.Option value="Rented">Rented</Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Description">
+              <TextArea
+                name="description"
+                value={car.description}
+                onChange={(e) => handleChange(e, index)}
+                rows={4}
+              />
+            </Form.Item>
+
+            <Form.Item label="Transmition">
+              <Select
+                name="transmition"
+                value={car.transmition}
+                onChange={(value) => handleChange({ target: { name: 'transmition', value } }, index)}
+              >
+                <Select.Option value="Automatique">Automatique</Select.Option>
+                <Select.Option value="Manuel">Manuel</Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Categories">
+              <Select
+                name="categories"
+                value={car.categories}
+                onChange={(value) => handleChange({ target: { name: 'categories', value } }, index)}
+              >
+                <Select.Option value="Suv">Suv</Select.Option>
+                <Select.Option value="Compacte">Compacte</Select.Option>
+                <Select.Option value="Electrique">Electrique</Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Carburant">
+              <Select
+                name="carburant"
+                value={car.carburant}
+                onChange={(value) => handleChange({ target: { name: 'carburant', value } }, index)}
+              >
+                <Select.Option value="Essence">Essence</Select.Option>
+                <Select.Option value="Diesel">Diesel</Select.Option>
+                <Select.Option value="Electrique">Electrique</Select.Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Caracteristique">
+              <TextArea
+                name="caracteristique"
+                value={car.caracteristique}
+                onChange={(e) => handleChange(e, index)}
+                rows={4}
+              />
+            </Form.Item>
+          </div>
+        ))}
         <Form.Item>
-        <Button style={{position: "absolute", left:"80%", border:"none", borderRadius:"100px"}}>Sumbit</Button>
-      </Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ position: "absolute", left: "80%", border: "none", borderRadius: "100px" }}
+          >
+            Submit
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );
 };
-export default () => <NewCar />;
+
+export default NewCar;

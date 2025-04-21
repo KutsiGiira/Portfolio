@@ -7,7 +7,6 @@ import java.util.Arrays;
 @Entity
 @Table(name="Car")
 public class Car {
-    //9ad tswira rah makadozch l db
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
