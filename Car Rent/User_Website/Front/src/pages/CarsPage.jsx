@@ -1,8 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CarCard from '../components/CarCard'
-import cars from '../data/cars'
 
 function CarsPage() {
+  const [cars, setCars] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8080/cars') // make sure this matches your Spring Boot endpoint
+      .then(res => res.json())
+      .then(data => setCars(data))
+      .catch(err => console.error('Error fetching cars:', err));
+  }, []);
+  
   const [filters, setFilters] = useState({
     category: '',
     priceRange: '',
@@ -155,7 +162,7 @@ function CarsPage() {
           </div>
         </div>
         
-        {/* Résultats */}
+        {/* HNA KAYNIN TOMOBILAT */}
         {filteredCars.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCars.map(car => (

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-
+// wa9ila chi 7aja hna mam9adach
+// 7it f main page rah kaybano walakin f single page kaybano l9dam
 function CarCard({ car }) {
   return (
     <div className="card hover:shadow-lg transition-shadow">
@@ -25,6 +26,6 @@ function CarCard({ car }) {
       </div>
     </div>
   )
-}
+} 
 
 export default CarCard

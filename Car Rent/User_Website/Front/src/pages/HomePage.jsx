@@ -1,18 +1,24 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'; // Add useState and useEffect
 import Hero from '../components/Hero'
-import Features from '../components/Features'
 import CarCard from '../components/CarCard'
-import cars from '../data/cars'
 
 function HomePage() {
-  // Afficher seulement 3 voitures sur la page d'accueil
-  const featuredCars = cars.slice(0, 3);
+  const [single, setCars] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8080/cars') // Backend endpoint
+      .then(res => res.json()) // Convert to JSON format
+      .then(data => setCars(data)) // Save the data to state
+      .catch(err => console.error('Error fetching cars:', err));
+  }, []);
+
+  const featuredCars = single.slice(0, 3);
   
   return (
     <div>
       <Hero />
       
-      <Features />
+      {/* <Features /> */}
       
       {/* Section voitures populaires */}
       <section className="py-16">
@@ -25,8 +31,8 @@ function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredCars.map(car => (
-              <CarCard key={car.id} car={car} />
+            {featuredCars.map(single => (
+              <CarCard key={single.id} single={single} />
             ))}
           </div>
         </div>
