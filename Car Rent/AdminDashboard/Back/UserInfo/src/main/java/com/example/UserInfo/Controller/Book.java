@@ -2,6 +2,7 @@ package com.example.UserInfo.Controller;
 
 import com.example.UserInfo.Model.Booking;
 import com.example.UserInfo.Model.BookingRepo;
+import com.example.UserInfo.Model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +23,9 @@ public class Book {
     public Booking reserv(@RequestBody Booking bg){
         return brepo.save(bg);
     }
+
+//    @GetMapping("/booking/{id}")
+//    public Booking findbyId(@PathVariable int id){
+//        return brepo.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
+//    }
 }

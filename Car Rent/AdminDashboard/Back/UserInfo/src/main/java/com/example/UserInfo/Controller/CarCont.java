@@ -16,24 +16,24 @@ public class CarCont {
     @Autowired
     public CarRepo carrepo;
 
+    //end point to get all cars
+
     @GetMapping("/cars")
     public List<Car> cars() {
         return carrepo.findAll();
     }
-    //hadchi rah makayt9rach f lfront
+
+    //end point to add cars
+
     @PostMapping("/cars")
     public Car carPost(@RequestBody Car car) {
         return carrepo.save(car);
     }
 
-    //9ad hadi rah ha bditiha wa9ila rah kamlha mkhrb9a mhm 9ad api li ijib singles
+    //end point to get Single cars
+
     @GetMapping("/cars/{id}")
-    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
-        Car car = carrepo.getReferenceById(id);
-        if (car != null) {
-            return ResponseEntity.ok(car);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Car findbyId(@PathVariable Long id){
+            return carrepo.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
     }
 }

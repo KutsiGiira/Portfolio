@@ -18,7 +18,6 @@ const NewCar = ({ style, onClose }) => {
       caracteristique: ''
     }
   ]);
-//chi 7aja mam9adch m3a lfront 7it makaybich i9ra db
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;

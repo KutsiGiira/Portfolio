@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import cars from '../data/cars'
 
+// rah khsrat lik had lpage wa9ila aykhsk t9ad ha lfetch dyal data 9ad wa7d endpoint li tjib car li reserviti
 function BookingPage() {
   const { id } = useParams();
   const navigate = useNavigate();

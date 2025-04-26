@@ -1,12 +1,24 @@
 import { useParams, Link } from 'react-router-dom'
-import { useState } from 'react'
-import cars from '../data/cars'
+import { useState, useEffect } from 'react'
 
 function CarDetailsPage() {
   const { id } = useParams();
-  const car = cars.find(car => car.id === parseInt(id));
   
   const [activeTab, setActiveTab] = useState('description');
+  const [car, setSingle] = useState(null);
+  const [cars, setCars] = useState([]);
+  
+  useEffect(() => {
+    fetch(`http://localhost:8080/cars/${id}`)
+      .then(res => res.json())
+      .then(data => {setSingle(data); console.log(data)})
+      .catch(err => console.log(err));
+    
+    fetch('http://localhost:8080/cars')
+      .then(res => res.json())
+      .then(data => {setCars(data); console.log(data)})
+      .catch(err => console.log(err));
+  }, [id]);
   
   if (!car) {
     return (
@@ -19,10 +31,11 @@ function CarDetailsPage() {
       </div>
     );
   }
-  
+
   return (
     <div className="py-12">
       <div className="container-custom">
+        {/* Back to Cars Link */}
         <div className="mb-8">
           <Link to="/cars" className="text-primary hover:underline flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-1">
@@ -31,7 +44,8 @@ function CarDetailsPage() {
             Retour aux voitures
           </Link>
         </div>
-        
+
+        {/* Car Details */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="md:flex">
             <div className="md:w-1/2">
@@ -48,10 +62,10 @@ function CarDetailsPage() {
                   <h1 className="text-3xl font-bold mb-2">{car.name}</h1>
                   <div className="flex items-center mb-4">
                     <span className="bg-accent text-secondary px-3 py-1 rounded-full text-sm font-semibold mr-2">
-                      {car.category}
+                      {car.categories}
                     </span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${car.available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {car.available ? 'Disponible' : 'Indisponible'}
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${car.status  === "Available"? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      {car.status}
                     </span>
                   </div>
                 </div>
@@ -64,11 +78,11 @@ function CarDetailsPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-gray-500 text-sm">Transmission</p>
-                    <p className="font-semibold">{car.transmission}</p>
+                    <p className="font-semibold">{car.transmition}</p>
                   </div>
                   <div>
                     <p className="text-gray-500 text-sm">Carburant</p>
-                    <p className="font-semibold">{car.fuelType}</p>
+                    <p className="font-semibold">{car.carburant}</p>
                   </div>
                 </div>
               </div>
@@ -82,8 +96,8 @@ function CarDetailsPage() {
                     Description
                   </button>
                   <button 
-                    className={`py-2 px-4 font-medium ${activeTab === 'features' ? 'text-primary border-b-2 border-primary' : 'text-gray-500'}`}
-                    onClick={() => setActiveTab('features')}
+                    className={`py-2 px-4 font-medium ${activeTab === 'caracteristique' ? 'text-primary border-b-2 border-primary' : 'text-gray-500'}`}
+                    onClick={() => setActiveTab('caracteristique')}
                   >
                     Caractéristiques
                   </button>
@@ -93,37 +107,29 @@ function CarDetailsPage() {
                   {activeTab === 'description' ? (
                     <p className="text-gray-700">{car.description}</p>
                   ) : (
-                    <ul className="grid grid-cols-2 gap-2">
-                      {car.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-gray-700">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-primary mr-2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="text-gray-700">{car.caracteristique}</p>
                   )}
                 </div>
               </div>
-              
+
+                  {/* mam9adch hdchi rah ha khrb9ti hdchi */}
               <Link 
                 to={`/booking/${car.id}`} 
-                className={`btn w-full text-center ${!car.available ? 'opacity-50 cursor-not-allowed' : ''}`}
-                onClick={e => !car.available && e.preventDefault()}
+                className={`btn w-full text-center ${car.status === "Rented" ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={e => car.status && e.preventDefault()}
               >
-                {car.available ? 'Réserver maintenant' : 'Indisponible'}
+                {car.status === "Available" ? 'Réserver maintenant' : 'Indisponible'}
               </Link>
             </div>
           </div>
         </div>
-        
+
         {/* Voitures similaires */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6">Voitures similaires</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {cars
-              .filter(c => c.id !== car.id && c.category === car.category)
+              .filter(c => c.id !== car.id && c.categories === car.categories)
               .slice(0, 3)
               .map(similarCar => (
                 <div key={similarCar.id} className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -143,9 +149,10 @@ function CarDetailsPage() {
               ))}
           </div>
         </div>
+        
       </div>
     </div>
   )
 }
 
-export default CarDetailsPage
+export default CarDetailsPage;

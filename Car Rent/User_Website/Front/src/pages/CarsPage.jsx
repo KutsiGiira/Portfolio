@@ -1,27 +1,30 @@
-import { useState, useEffect } from 'react'
-import CarCard from '../components/CarCard'
+import { useState, useEffect } from 'react';
+import CarCard from '../components/CarCard';
 
 function CarsPage() {
   const [cars, setCars] = useState([]);
-  useEffect(() => {
-    fetch('http://localhost:8080/cars') // make sure this matches your Spring Boot endpoint
-      .then(res => res.json())
-      .then(data => setCars(data))
-      .catch(err => console.error('Error fetching cars:', err));
-  }, []);
-  
   const [filters, setFilters] = useState({
     category: '',
     priceRange: '',
-    transmission: '',
-    fuelType: ''
+    transmition: '',
+    carburant: ''
   });
-  
-  // Extraire les catégories uniques
-  const categories = [...new Set(cars.map(car => car.category))];
-  const transmissions = [...new Set(cars.map(car => car.transmission))];
-  const fuelTypes = [...new Set(cars.map(car => car.fuelType))];
-  
+
+  useEffect(() => {
+    fetch('http://localhost:8080/cars')
+      .then(res => res.json())
+      .then(data => {
+        setCars(data);
+        console.log(data);
+      })
+      .catch(err => console.error('Error fetching cars:', err));
+  }, []);
+
+  // Extract unique categories, transmition, and carburant
+  const categories = [...new Set(cars.map(car => car.categories))];
+  const transmitions = [...new Set(cars.map(car => car.transmition))];
+  const carburants = [...new Set(cars.map(car => car.carburant))];
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters(prev => ({
@@ -29,56 +32,40 @@ function CarsPage() {
       [name]: value
     }));
   };
-  
+
   const resetFilters = () => {
     setFilters({
       category: '',
       priceRange: '',
-      transmission: '',
-      fuelType: ''
+      transmition: '',
+      carburant: ''
     });
   };
-  
-  // Filtrer les voitures
+
+  // Filter cars based on the selected filters
   const filteredCars = cars.filter(car => {
-    // Filtre par catégorie
-    if (filters.category && car.category !== filters.category) {
-      return false;
-    }
-    
-    // Filtre par gamme de prix
+    if (filters.category && car.categories !== filters.category) return false;
     if (filters.priceRange) {
       const [min, max] = filters.priceRange.split('-').map(Number);
-      if (car.price < min || (max && car.price > max)) {
-        return false;
-      }
+      if (car.price < min || (max && car.price > max)) return false;
     }
-    
-    // Filtre par transmission
-    if (filters.transmission && car.transmission !== filters.transmission) {
-      return false;
-    }
-    
-    // Filtre par type de carburant
-    if (filters.fuelType && car.fuelType !== filters.fuelType) {
-      return false;
-    }
-    
+    if (filters.transmition && car.transmition !== filters.transmition) return false;
+    if (filters.carburant && car.carburant !== filters.carburant) return false;
     return true;
   });
-  
+
   return (
     <div className="py-12">
       <div className="container-custom">
-        <h1 className="text-3xl font-bold mb-8">Nos Voitures Disponibles</h1>
-        
-        {/* Filtres */}
+        <h1 className="text-3xl font-bold mb-8">Available Cars</h1>
+
+        {/* Filters */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Catégorie */}
+            {/* Category */}
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Catégorie
+                Category
               </label>
               <select
                 id="category"
@@ -87,17 +74,17 @@ function CarsPage() {
                 onChange={handleFilterChange}
                 className="w-full border border-gray-300 rounded-md p-2"
               >
-                <option value="">Toutes les catégories</option>
+                <option value="">All Categories</option>
                 {categories.map(category => (
                   <option key={category} value={category}>{category}</option>
                 ))}
               </select>
             </div>
-            
-            {/* Prix */}
+
+            {/* Price */}
             <div>
               <label htmlFor="priceRange" className="block text-sm font-medium text-gray-700 mb-1">
-                Prix par jour
+                Price per day
               </label>
               <select
                 id="priceRange"
@@ -106,63 +93,63 @@ function CarsPage() {
                 onChange={handleFilterChange}
                 className="w-full border border-gray-300 rounded-md p-2"
               >
-                <option value="">Tous les prix</option>
-                <option value="0-50">Moins de 50€</option>
+                <option value="">All Prices</option>
+                <option value="0-50">Less than 50€</option>
                 <option value="50-80">50€ - 80€</option>
-                <option value="80-1000">Plus de 80€</option>
+                <option value="80-1000">More than 80€</option>
               </select>
             </div>
-            
-            {/* Transmission */}
+
+            {/* Transmition */}
             <div>
-              <label htmlFor="transmission" className="block text-sm font-medium text-gray-700 mb-1">
-                Transmission
+              <label htmlFor="transmition" className="block text-sm font-medium text-gray-700 mb-1">
+                Transmition
               </label>
               <select
-                id="transmission"
-                name="transmission"
-                value={filters.transmission}
+                id="transmition"
+                name="transmition"
+                value={filters.transmition}
                 onChange={handleFilterChange}
                 className="w-full border border-gray-300 rounded-md p-2"
               >
-                <option value="">Toutes les transmissions</option>
-                {transmissions.map(transmission => (
-                  <option key={transmission} value={transmission}>{transmission}</option>
+                <option value="">All Transmitions</option>
+                {transmitions.map(transmition => (
+                  <option key={transmition} value={transmition}>{transmition}</option>
                 ))}
               </select>
             </div>
-            
-            {/* Type de carburant */}
+
+            {/* Carburant */}
             <div>
-              <label htmlFor="fuelType" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="carburant" className="block text-sm font-medium text-gray-700 mb-1">
                 Carburant
               </label>
               <select
-                id="fuelType"
-                name="fuelType"
-                value={filters.fuelType}
+                id="carburant"
+                name="carburant"
+                value={filters.carburant}
                 onChange={handleFilterChange}
                 className="w-full border border-gray-300 rounded-md p-2"
               >
-                <option value="">Tous les carburants</option>
-                {fuelTypes.map(fuelType => (
-                  <option key={fuelType} value={fuelType}>{fuelType}</option>
+                <option value="">All Carburants</option>
+                {carburants.map(carburant => (
+                  <option key={carburant} value={carburant}>{carburant}</option>
                 ))}
               </select>
             </div>
           </div>
-          
+
           <div className="mt-4 flex justify-end">
-            <button 
+            <button
               onClick={resetFilters}
               className="px-4 py-2 text-gray-600 hover:text-gray-800"
             >
-              Réinitialiser les filtres
+              Reset Filters
             </button>
           </div>
         </div>
-        
-        {/* HNA KAYNIN TOMOBILAT */}
+
+        {/* Display filtered cars */}
         {filteredCars.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCars.map(car => (
@@ -171,18 +158,18 @@ function CarsPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-xl text-gray-600">Aucune voiture ne correspond à vos critères.</p>
-            <button 
+            <p className="text-xl text-gray-600">No cars match your criteria.</p>
+            <button
               onClick={resetFilters}
               className="mt-4 btn"
             >
-              Réinitialiser les filtres
+              Reset Filters
             </button>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default CarsPage
+export default CarsPage;
