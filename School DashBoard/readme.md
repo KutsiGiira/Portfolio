@@ -1,1 +1,1 @@
-Making final project for school (dashboard + mobile app)
+School dashboard for management of students and teachers
