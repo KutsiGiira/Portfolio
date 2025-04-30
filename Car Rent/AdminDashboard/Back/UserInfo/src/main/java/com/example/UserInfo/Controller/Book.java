@@ -23,7 +23,7 @@ public class Book {
     public Booking reserv(@RequestBody Booking bg){
         return brepo.save(bg);
     }
-
+        //khriti wa9ila hna 7it katjib lik l user machi tomobil
 //    @GetMapping("/booking/{id}")
 //    public Booking findbyId(@PathVariable int id){
 //        return brepo.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));

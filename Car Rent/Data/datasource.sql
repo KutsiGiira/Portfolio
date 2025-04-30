@@ -8,6 +8,8 @@ FLUSH PRIVILEGES;
 CREATE DATABASE caradmin;
 USE caradmin;
 -- we have 3 (booking , car  , contact )
+
+
 -- first table
 
 CREATE TABLE booking (
@@ -21,7 +23,7 @@ CREATE TABLE booking (
     address VARCHAR(40),
     Ville VARCHAR(20),
     Code_Postal INT,
-    permis_number INT,
+    permis_number INT
 );
  
  --second table 
@@ -36,7 +38,7 @@ CREATE TABLE booking (
     Transmition ENUM('Automatique', 'Manuel'),
     Categories ENUM('SUV', 'Compacte', 'Electrique'),
     Carburant ENUM('Essence', 'Diesel', 'Electrique'),
-    Caracteristique TEXT,
+    Caracteristique TEXT
 );
 
 -- third table
@@ -46,6 +48,6 @@ CREATE TABLE contact (
     Name VARCHAR(40),
     Email VARCHAR(50),
     Sujet VARCHAR(40),
-    Message TEXT,
+    Message TEXT
 );
 
