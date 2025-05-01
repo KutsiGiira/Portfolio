@@ -108,8 +108,7 @@ function BookingPage() {
     e.preventDefault();
     // if (validateForm())
       //  {
-      fetch('http://localhost:8080/booking', {
-        method: 'POST',
+      fetch('http://localhost:8080/booking/' + id, {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
