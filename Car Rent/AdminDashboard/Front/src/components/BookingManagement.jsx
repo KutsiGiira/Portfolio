@@ -17,9 +17,16 @@ function BookingManagement() {
       setCustomer(data);
     })
     .catch(error => {
-      console.error("err")
+      console.error("err " + error)
     })
   }, [])
+
+
+// BA9I LIK SEARCH T9ADO 
+// TSWIRA
+// FORM TSD W T7L
+// LA CONFIRMITI T9DR TMS7 L COMMAND
+// 9AD STATS
 
   return (
     <div className="p-6">
@@ -29,15 +36,14 @@ function BookingManagement() {
           {customer.map((cus) => (
             <div key={cus.id} className="flex items-center justify-between p-4 border-b">
               <div>
-                <Text className="font-medium">{cus.fname +" "+ cus.lname}</Text>
+                <Text className="font-medium">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">  {cus.email}</span></Text>
                 <Text className="font-small">{cus.phone}</Text>
-                <Text className="text-gray-500">car to rent</Text>
+                <Text className="text-gray-500">{cus.car_name}</Text>
               </div>
-              <div className="flex items-center gap-4">
-                <Text>From : {cus.start_date} To :  {cus.end_date}</Text>
-                <Badge color={cus.status === 'active' ? 'green' : 'yellow'}>
-                  {cus.status}availbale
-                </Badge>
+              <div>
+                <Text><span className='text-gray-500'>From : </span>{cus.start_date} <span className='text-gray-500'>To : </span> {cus.end_date}</Text>
+                <Text className="font-small text-center">{cus.ville}</Text>
+                <Text className="font-small text-center">{cus.permis_number}</Text>
               </div>
             </div>
           ))}

@@ -21,11 +21,12 @@ public class Book {
     }
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + bg);
         return brepo.save(bg);
     }
 
     @GetMapping("/booking/{id}")
     public Booking CarToBook(@PathVariable int id){
-        return brepo.findById(id).orElseThrow(() -> new RuntimeException("Invalid to book"));
+        return brepo.findById(id).orElseThrow(() -> new RuntimeException("no Car"));
     }
 }

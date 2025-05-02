@@ -112,11 +112,10 @@ function CarDetailsPage() {
                 </div>
               </div>
 
-                  {/* mam9adch hdchi rah ha khrb9ti hdchi */}
               <Link 
                 to={`/booking/${car.id}`} 
                 className={`btn w-full text-center ${car.status === "Rented" ? 'opacity-50 cursor-not-allowed' : ''}`}
-                onClick={e => car.status && e.preventDefault()}
+                onClick={e => { if (car.status === "Rented")  e.preventDefault()}}
               >
                 {car.status === "Available" ? 'Réserver maintenant' : 'Indisponible'}
               </Link>
@@ -130,7 +129,7 @@ function CarDetailsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {cars
               .filter(c => c.id !== car.id && c.categories === car.categories)
-              .slice(0, 3)
+              .slice(0, 10)
               .map(similarCar => (
                 <div key={similarCar.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   <img 

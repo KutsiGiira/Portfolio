@@ -1,10 +1,11 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import cars from '../data/cars'
 
 // rah khsrat lik had lpage wa9ila aykhsk t9ad ha lfetch dyal data 9ad wa7d endpoint li tjib car li reserviti
 function BookingPage() {
   const { id } = useParams();
+  let carReserved = "";
   const navigate = useNavigate();
   const car = cars.find(car => car.id === parseInt(id));
   const [formData, setFormData] = useState({
@@ -17,10 +18,10 @@ function BookingPage() {
     adresse: '',
     ville: '',
     code_postal: '',
+    car_name: '',
     permis_number: '',
     agreeTerms: false
   });
-
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -59,58 +60,70 @@ function BookingPage() {
     }
   };
 
-  // const validateForm = () => {
-  //   const newErrors = {};
+  const validateForm = () => {
+    const newErrors = {};
 
-  //   if (!formData.start_date) {
-  //     newErrors.start_date = "La date de début est requise";
-  //   }
+    if (!formData.start_date) {
+      newErrors.start_date = "La date de début est requise";
+    }
 
-  //   if (!formData.end_date) {
-  //     newErrors.end_date = "La date de fin est requise";
-  //   } else if (formData.start_date && new Date(formData.end_date) <= new Date(formData.start_date)) {
-  //     newErrors.end_date = "La date de fin doit être après la date de début";
-  //   }
+    if (!formData.end_date) {
+      newErrors.end_date = "La date de fin est requise";
+    } else if (formData.start_date && new Date(formData.end_date) <= new Date(formData.start_date)) {
+      newErrors.end_date = "La date de fin doit être après la date de début";
+    }
 
-  //   if (!formData.fname.trim()) {
-  //     newErrors.fname = "Le prénom est requis";
-  //   }
+    if (!formData.fname.trim()) {
+      newErrors.fname = "Le prénom est requis";
+    }
 
-  //   if (!formData.lname.trim()) {
-  //     newErrors.lname = "Le nom est requis";
-  //   }
+    if (!formData.lname.trim()) {
+      newErrors.lname = "Le nom est requis";
+    }
 
-  //   if (!formData.email.trim()) {
-  //     newErrors.email = "L'email est requis";
-  //   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-  //     newErrors.email = "L'email n'est pas valide";
-  //   }
+    if (!formData.email.trim()) {
+      newErrors.email = "L'email est requis";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "L'email n'est pas valide";
+    }
 
-  //   if (!formData.phone.trim()) {
-  //     newErrors.phone = "Le téléphone est requis";
-  //   } else if (!/^\+?[0-9\s-]+$/.test(formData.phone)) {
-  //     newErrors.phone = "Numéro de téléphone invalide";
-  //   }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Le téléphone est requis";
+    } else if (!/^\+?[0-9\s-]+$/.test(formData.phone)) {
+      newErrors.phone = "Numéro de téléphone invalide";
+    }
 
-  //   if (!formData.permis_number.trim()) {
-  //     newErrors.permis_number = "Le numéro de permis est requis";
-  //   }
+    if (!formData.permis_number.trim()) {
+      newErrors.permis_number = "Le numéro de permis est requis";
+    }
 
-  //   if (!formData.agreeTerms) {
-  //     newErrors.agreeTerms = "Vous devez accepter les conditions";
-  //   }
+    if (!formData.agreeTerms) {
+      newErrors.agreeTerms = "Vous devez accepter les conditions";
+    }
 
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+const [single, setCar] = useState([]);
+    useEffect(() => {
+    (fetch('http://localhost:8080/cars/' + id)
+    .then(res => res.json())
+    .then(data => {setCar(data), console.log(data)}))
+      .catch(err => console.error(err));}, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (validateForm())
-      //  {
-      fetch('http://localhost:8080/booking/' + id, {
+    if (validateForm())
+       {
+        const updatedFormData = {
+          ...formData,
+          car_name: single.name
+        };
+      fetch('http://localhost:8080/booking', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       })
         .then(response => response.json())
         .then(data => {
@@ -125,17 +138,22 @@ function BookingPage() {
             adresse: '',
             ville: '',
             code_postal: '',
+            car_name: '',
             permis_number: '',
             agreeTerms: false
           });
-          console.log("data sent", data)
+          console.log("data sent", data);
+          console.log(formData);
+          carReserved = single.name;
+          formData.car_name = carReserved;
+
           navigate('/');
         })
         .catch(error => {
           console.error("Error submitting form:", error);
           alert("Une erreur s'est produite lors de la réservation.");
         });
-    // }
+    }
   };
 
   const calculateTotal = () => {
@@ -144,7 +162,7 @@ function BookingPage() {
       const end_date = new Date(formData.end_date);
       if (end_date > start_date) {
         const days = Math.ceil((end_date - start_date) / (1000 * 60 * 60 * 24));
-        return days * car.price;
+        return days * single.price;
       }
     }
     return 0;
@@ -156,7 +174,7 @@ function BookingPage() {
     <div className="py-12 bg-gray-50">
       <div className="container-custom">
         <div className="mb-8">
-          <Link to={`/cars/${car.id}`} className="text-primary hover:underline flex items-center">
+          <Link to={`/cars/${single.id}`} className="text-primary hover:underline flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-1">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
@@ -164,7 +182,7 @@ function BookingPage() {
           </Link>
         </div>
         
-        <h1 className="text-3xl font-bold mb-8">Réserver {car.name}</h1>
+        <h1 className="text-3xl font-bold mb-8">Réserver {single.name}</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Formulaire de réservation */}
@@ -354,8 +372,7 @@ function BookingPage() {
                 </div>
                 {errors.agreeTerms && <p className="text-red-500 text-sm mt-1">{errors.agreeTerms}</p>}
               </div>
-              
-              <button type="submit" className="btn w-full" onClick={() => setSubmitted(false)}>
+              <button type="submit" className="btn w-full">
                 Confirmer la réservation
               </button>
             </form>
@@ -368,20 +385,20 @@ function BookingPage() {
               
               <div className="flex items-center mb-6">
                 <img 
-                  src={car.image} 
-                  alt={car.name} 
+                  src={single.image} 
+                  alt={single.name} 
                   className="w-20 h-20 object-cover rounded-md mr-4"
                 />
                 <div>
-                  <h3 className="font-bold">{car.name}</h3>
-                  <p className="text-gray-600">{car.category}</p>
+                  <h3 className="font-bold">{single.name}</h3>
+                  <p className="text-gray-600">{single.category}</p>
                 </div>
               </div>
               
               <div className="border-t border-gray-200 pt-4 mb-4">
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-600">Prix par jour:</span>
-                  <span>{car.price}€</span>
+                  <span>{single.price}€</span>
                 </div>
                 
                 {formData.start_date && formData.end_date && new Date(formData.end_date) > new Date(formData.start_date) && (

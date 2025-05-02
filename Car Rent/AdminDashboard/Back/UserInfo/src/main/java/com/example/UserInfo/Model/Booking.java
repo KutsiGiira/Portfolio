@@ -20,8 +20,9 @@ public class Booking {
     private String ville;
     private int code_postal;
     private int permis_number;
+    private String car_name;
 
-    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number) {
+    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number,  String car_name) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -33,9 +34,10 @@ public class Booking {
         this.ville = ville;
         this.code_postal = code_postal;
         this.permis_number = permis_number;
+        this.car_name = car_name;
     }
 
-    public Booking(Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number) {
+    public Booking(Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number ,String car_name) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.fname = fname;
@@ -46,6 +48,8 @@ public class Booking {
         this.ville = ville;
         this.code_postal = code_postal;
         this.permis_number = permis_number;
+        this.car_name = car_name;
+
     }
 
     public Booking() {
@@ -139,6 +143,14 @@ public class Booking {
         this.permis_number = permis_number;
     }
 
+    public String getCar_name() {
+        return car_name;
+    }
+
+    public void setCar_name(String car_name) {
+        this.car_name = car_name;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -152,6 +164,7 @@ public class Booking {
                 ", address='" + address + '\'' +
                 ", ville='" + ville + '\'' +
                 ", code_postal=" + code_postal +
+                ", car_name=" + car_name +
                 ", permis_number=" + permis_number +
                 '}';
     }
