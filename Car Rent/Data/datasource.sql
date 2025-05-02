@@ -23,7 +23,8 @@ CREATE TABLE booking (
     address VARCHAR(40),
     Ville VARCHAR(20),
     Code_Postal INT,
-    permis_number INT
+    permis_number INT,
+    car_name VARCHAR(40)
 );
  
  --second table 
