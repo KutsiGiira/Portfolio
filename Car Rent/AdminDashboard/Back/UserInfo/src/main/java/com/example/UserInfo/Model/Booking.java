@@ -21,8 +21,9 @@ public class Booking {
     private int code_postal;
     private int permis_number;
     private String car_name;
+    private int payement;
 
-    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number,  String car_name) {
+    public Booking(int id, Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number,  String car_name, int payement) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -35,9 +36,10 @@ public class Booking {
         this.code_postal = code_postal;
         this.permis_number = permis_number;
         this.car_name = car_name;
+        this.payement = payement;
     }
 
-    public Booking(Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number ,String car_name) {
+    public Booking(Date start_date, Date end_date, String fname, String lname, String email, String phone, String address, String ville, int code_postal, int permis_number ,String car_name, int payement) {
         this.start_date = start_date;
         this.end_date = end_date;
         this.fname = fname;
@@ -49,6 +51,8 @@ public class Booking {
         this.code_postal = code_postal;
         this.permis_number = permis_number;
         this.car_name = car_name;
+        this.payement = payement;
+
 
     }
 
@@ -151,6 +155,14 @@ public class Booking {
         this.car_name = car_name;
     }
 
+    public int getPayement() {
+        return payement;
+    }
+
+    public void setPayement(int payement) {
+        this.payement = payement;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -166,6 +178,7 @@ public class Booking {
                 ", code_postal=" + code_postal +
                 ", car_name=" + car_name +
                 ", permis_number=" + permis_number +
+                ", payement=" + payement +
                 '}';
     }
 }

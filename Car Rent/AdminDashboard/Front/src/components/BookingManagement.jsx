@@ -22,11 +22,11 @@ function BookingManagement() {
   }, [])
 
 
-// BA9I LIK SEARCH T9ADO 
-// TSWIRA
-// FORM TSD W T7L
-// LA CONFIRMITI T9DR TMS7 L COMMAND
-// 9AD STATS
+// TSWIRA (user page , w lform li f db)
+// FORM TSD W T7L (dashboard.cars page)
+// LA CONFIRMITI T9DR TMS7 L COMMAND (dashboard.booking page)
+// 9AD STATS (db.report)
+// kml 3la dash page (main)
 
   return (
     <div className="p-6">

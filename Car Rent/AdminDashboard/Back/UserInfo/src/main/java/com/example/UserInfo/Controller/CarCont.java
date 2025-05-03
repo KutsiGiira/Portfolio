@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping
@@ -23,6 +25,13 @@ public class CarCont {
         return carrepo.findAll();
     }
 
+    @GetMapping("/cars/count")
+    public ResponseEntity<Map<String, Long>> getCarCount() {
+        long count = carrepo.CountAllCars();
+        Map<String, Long> response = new HashMap<>();
+        response.put("Total", count);
+        return ResponseEntity.ok(response);
+    }
     //end point to add cars
 
     @PostMapping("/cars")

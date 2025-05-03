@@ -2,7 +2,6 @@ import { Card, Title, Text, TextInput } from '@tremor/react';
 import {useState, useEffect}from 'react';
 function CustomerDatabase() {
   const [customer, setCustomer] = useState([])
-
   useEffect(() =>{
     fetch("http://localhost:8080/contact")
     .then(res =>{
@@ -15,24 +14,22 @@ function CustomerDatabase() {
       console.log(data);
       setCustomer(data);
     })
-    .catch(error => {
-      console.error("err")
+    .catch(err => {
+      console.error(err)
     })
   }, [])
- 
-//9ad ports
+  const [search, setSearch] = useState('');
+  const filterNames = customer.filter((cus) => cus.nom.toLowerCase().includes(search.toLowerCase()));
 // had lpage t9adat la biti t9ad ba9i desigh liha 7sn mhm tal db mzyan
   return (
     <div className="p-6">
       <Title>Customer Database</Title>
-      
       <div className="mt-6 mb-4">
-        <TextInput placeholder="Search customers..." />
+        <TextInput placeholder="Search customers..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
-
       <Card>
         <div className="space-y-4">
-          {customer.map((cus) => (
+          {filterNames.length > 0 ? (filterNames.map((cus) => (
             <div key={cus.id} className="flex items-center justify-between p-4 border-b">
               <div>
                 <Text className="font-medium">{cus.nom}</Text>
@@ -43,7 +40,9 @@ function CustomerDatabase() {
                 <Text className="text-gray-500">Message: {cus.message} "f"</Text>
               </div>
             </div>
-          ))}
+          ))): (
+            <Text className="text-center text-gray-500">No customers found.</Text>
+          )}
         </div>
       </Card>
     </div>
