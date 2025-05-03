@@ -19,6 +19,7 @@ function BookingPage() {
     ville: '',
     code_postal: '',
     car_name: '',
+    payement: '',
     permis_number: '',
     agreeTerms: false
   });
@@ -118,7 +119,8 @@ const [single, setCar] = useState([]);
        {
         const updatedFormData = {
           ...formData,
-          car_name: single.name
+          car_name: single.name,
+          payement: total
         };
       fetch('http://localhost:8080/booking', {
         method: 'POST',
@@ -139,6 +141,7 @@ const [single, setCar] = useState([]);
             ville: '',
             code_postal: '',
             car_name: '',
+            payement: '',
             permis_number: '',
             agreeTerms: false
           });
@@ -371,6 +374,7 @@ const [single, setCar] = useState([]);
                   </label>
                 </div>
                 {errors.agreeTerms && <p className="text-red-500 text-sm mt-1">{errors.agreeTerms}</p>}
+                <input type="text" value={total} />
               </div>
               <button type="submit" className="btn w-full">
                 Confirmer la réservation
