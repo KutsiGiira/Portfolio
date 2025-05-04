@@ -44,6 +44,7 @@ function BookingManagement() {
                 <Text><span className='text-gray-500'>From : </span>{cus.start_date} <span className='text-gray-500'>To : </span> {cus.end_date}</Text>
                 <Text className="font-small text-center">{cus.ville}</Text>
                 <Text className="font-small text-center">{cus.permis_number}</Text>
+                <Text className="font-small text-center">A mount to pay : {cus.payement}$</Text>
               </div>
             </div>
           ))}

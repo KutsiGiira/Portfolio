@@ -1,5 +1,6 @@
 package com.example.UserInfo.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -10,7 +11,9 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date start_date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
     private String fname;
     private String lname;
