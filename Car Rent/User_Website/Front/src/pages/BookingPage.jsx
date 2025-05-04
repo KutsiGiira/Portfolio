@@ -20,8 +20,8 @@ function BookingPage() {
     code_postal: '',
     car_name: '',
     payement: '',
-    permis_number: '',
-    agreeTerms: false
+    permis_number: ''
+    // agreeTerms: false
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -113,14 +113,32 @@ const [single, setCar] = useState([]);
     .then(data => {setCar(data), console.log(data)}))
       .catch(err => console.error(err));}, []);
 
+      const calculateTotal = () => {
+        if (formData.start_date && formData.end_date) {
+          const start_date = new Date(formData.start_date);
+          const end_date = new Date(formData.end_date);
+          if (end_date > start_date) {
+            const days = Math.ceil((end_date - start_date) / (1000 * 60 * 60 * 24));
+            console.log(days * single.price);
+            return days * single.price;
+          }
+        }
+        return 0;
+      };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!single || !single.price){
+      console.log("tsna");
+      return;
+    }
     if (validateForm())
        {
+        const totalCounter = calculateTotal();
         const updatedFormData = {
           ...formData,
           car_name: single.name,
-          payement: total
+          payement: Number(totalCounter)
         };
       fetch('http://localhost:8080/booking', {
         method: 'POST',
@@ -129,6 +147,7 @@ const [single, setCar] = useState([]);
       })
         .then(response => response.json())
         .then(data => {
+          console.log(data);
           setSubmitted(true);
           setFormData({
             start_date: '',
@@ -145,11 +164,6 @@ const [single, setCar] = useState([]);
             permis_number: '',
             agreeTerms: false
           });
-          console.log("data sent", data);
-          console.log(formData);
-          carReserved = single.name;
-          formData.car_name = carReserved;
-
           navigate('/');
         })
         .catch(error => {
@@ -159,17 +173,7 @@ const [single, setCar] = useState([]);
     }
   };
 
-  const calculateTotal = () => {
-    if (formData.start_date && formData.end_date) {
-      const start_date = new Date(formData.start_date);
-      const end_date = new Date(formData.end_date);
-      if (end_date > start_date) {
-        const days = Math.ceil((end_date - start_date) / (1000 * 60 * 60 * 24));
-        return days * single.price;
-      }
-    }
-    return 0;
-  };
+ 
   
   const total = calculateTotal();
   
@@ -365,7 +369,7 @@ const [single, setCar] = useState([]);
                     type="checkbox"
                     id="agreeTerms"
                     name="agreeTerms"
-                    checked={formData.agreeTerms}
+                    // checked={formData.agreeTerms}
                     onChange={handleChange}
                     className="mt-1"
                   />

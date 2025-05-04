@@ -20,7 +20,6 @@ function CarsPage() {
       .catch(err => console.error('Error fetching cars:', err));
   }, []);
 
-  // Extract unique categories, transmition, and carburant
   const categories = [...new Set(cars.map(car => car.categories))];
   const transmitions = [...new Set(cars.map(car => car.transmition))];
   const carburants = [...new Set(cars.map(car => car.carburant))];
