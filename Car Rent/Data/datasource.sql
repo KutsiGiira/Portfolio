@@ -1,17 +1,14 @@
-CREATE USER 'carRent'@'localhost' IDENTIFIED BY 'carRent';
-GRANT ALL PRIVILEGES ON *.* TO 'carRent'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
 -- connect to user using MYSQL by querring those commandes
 -- \sql
 -- \connect carRent@localhost:3306
 -- password carRent
+-- run commands below
+
+CREATE USER 'carRent'@'localhost' IDENTIFIED BY 'carRent';
+GRANT ALL PRIVILEGES ON *.* TO 'carRent'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 CREATE DATABASE caradmin;
 USE caradmin;
--- we have 3 (booking , car  , contact )
-
-
--- first table
-
 CREATE TABLE booking (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Start_Date DATE,
@@ -27,9 +24,6 @@ CREATE TABLE booking (
     car_name VARCHAR(40),
     payement INT
 );
- 
- --second table 
-
  CREATE TABLE car (
     id INT AUTO_INCREMENT PRIMARY KEY,
     Image LONGBLOB,
@@ -42,9 +36,6 @@ CREATE TABLE booking (
     Carburant ENUM('Essence', 'Diesel', 'Electrique'),
     Caracteristique TEXT
 );
-
--- third table
-
 CREATE TABLE contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(40),
@@ -52,4 +43,3 @@ CREATE TABLE contact (
     Sujet VARCHAR(40),
     Message TEXT
 );
-
