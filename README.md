@@ -1,1 +1,1 @@
-Building some personal project
+Building Projects for school / personal portfolio
