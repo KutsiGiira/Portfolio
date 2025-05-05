@@ -11,12 +11,13 @@ function CarManagement() {
   }, []);
 
 
-const [FormVis, setFormVis] = useState("none")
-  function open(){
-    setFormVis("block")
+  const [FormVis, setFormVis] = useState(false);
+  function open() {
+    setFormVis(true);
   }
-  function close(){
-    setFormVis("none")
+
+  function close() {
+    setFormVis(false);
   }
   return (
     <div className="p-6" style={{zIndex: 1}}>
@@ -24,7 +25,7 @@ const [FormVis, setFormVis] = useState("none")
         <Title>Car Management</Title>
         <Button style={{position: 'absolute', left: "90%"}} onClick={open}>Add New Car</Button>
         <div>
-        <AddNewCar onClose={close} style={{display: FormVis}}/>
+        {FormVis && <AddNewCar onClose={close} />}
     </div>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
+import './Label.css'
 import { Form, Input, Button, InputNumber, Upload, message, Select } from 'antd';
 
 const { TextArea } = Input;
@@ -55,7 +56,7 @@ const NewCar = ({ style, onClose }) => {
       transform: "translateX(-50%)",
       borderRadius: "20px",
       color: "white",
-      display: style
+      display: style,
     }} className="flex-1 overflow-auto bg-blue-900">
 
       <Form onFinish={handleSubmit} labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900 }}>
@@ -63,13 +64,15 @@ const NewCar = ({ style, onClose }) => {
           <Button
             style={{
               position: "absolute",
-              left: "160%",
+              right: "0px",
+              top: "10px",
               border: "none",
               borderRadius: "100px",
               backgroundColor: "#f00",
               color: "#fff",
             }}
             onClick={onClose}
+            onMouseEnter={() => console.log("X Button Hovered")}
           >
             X
           </Button>

@@ -1,7 +1,6 @@
 import { Card, Title, Text, Grid, Metric } from '@tremor/react';
 import { useEffect, useState } from 'react';
 function Dashboard() {
-
   //ba9i lik t9ad  ActiveBooking w monthly review (jm3 ga3 l flos walakin l chher (i9d tmrdk 3tiha w9tha))
 const [totalCars, setTotal] = useState([])
   useEffect(() =>{

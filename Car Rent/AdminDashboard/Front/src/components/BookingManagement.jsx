@@ -21,12 +21,17 @@ function BookingManagement() {
     })
   }, [])
 
+  const ConfirmBooking = (id) => {
+    fetch("http://localhost:8080/confirm/" + id,{method: "DELETE"})
+    .then(data => console.log("dazt" + data))
+    .catch(err => console.error(err))
+      window.location.reload();
+  }
 
 // TSWIRA (user page , w lform li f db)
-// FORM TSD W T7L (dashboard.cars page)
-// LA CONFIRMITI T9DR TMS7 L COMMAND (dashboard.booking page)
 // 9AD STATS (db.report)
-// kml 3la dash page (main)
+// kml 3la dash page (main) (total revenue / active booking)
+// car management Edit menu tbdl available w taman
 
   return (
     <div className="p-6">
@@ -36,9 +41,9 @@ function BookingManagement() {
           {customer.map((cus) => (
             <div key={cus.id} className="flex items-center justify-between p-4 border-b">
               <div>
-                <Text className="font-medium">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">  {cus.email}</span></Text>
-                <Text className="font-small">{cus.phone}</Text>
-                <Text className="text-gray-500">{cus.car_name}</Text>
+                <Text className="text-xl">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">  {cus.email}</span></Text>
+                <Text className="text-sm">{cus.phone}</Text>
+                <Text className="text-gray-900">{cus.car_name}</Text>
               </div>
               <div>
                 <Text><span className='text-gray-500'>From : </span>{cus.start_date} <span className='text-gray-500'>To : </span> {cus.end_date}</Text>
@@ -46,10 +51,12 @@ function BookingManagement() {
                 <Text className="font-small text-center">{cus.permis_number}</Text>
                 <Text className="font-small text-center">A mount to pay : {cus.payement}$</Text>
               </div>
+              <button onClick={() => ConfirmBooking(cus.id)}>Confirmed</button>
             </div>
           ))}
         </div>
       </Card>
+      
     </div>
   );
 }

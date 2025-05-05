@@ -1,0 +1,5 @@
+/* In a global CSS file (e.g., index.css) */
+.ant-form-item-label > label {
+    color: white; /* Tailwind's blue-500 */
+    font-weight: 600;
+  }

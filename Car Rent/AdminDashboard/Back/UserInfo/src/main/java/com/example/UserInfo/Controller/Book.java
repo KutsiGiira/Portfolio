@@ -19,6 +19,7 @@ public class Book {
     public List<Booking> book(){
         return brepo.findAll();
     }
+
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + bg);
@@ -28,5 +29,13 @@ public class Book {
     @GetMapping("/booking/{id}")
     public Booking CarToBook(@PathVariable int id){
         return brepo.findById(id).orElseThrow(() -> new RuntimeException("no Car"));
+    }
+    @DeleteMapping("/confirm/{id}")
+    public String ConfirmBook(@PathVariable int id) {
+        if (brepo.existsById(id)) {
+            brepo.deleteById(id);
+            return "deleted";
+        }
+        return "Not found";
     }
 }
