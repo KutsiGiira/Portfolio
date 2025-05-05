@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'; // Add useState and useEffect
+import { useState, useEffect } from 'react';
 import Hero from '../components/Hero'
 import CarCard from '../components/CarCard'
 import Features from '../components/Features';

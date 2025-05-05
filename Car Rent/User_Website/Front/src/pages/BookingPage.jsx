@@ -2,7 +2,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import cars from '../data/cars'
 
-// rah khsrat lik had lpage wa9ila aykhsk t9ad ha lfetch dyal data 9ad wa7d endpoint li tjib car li reserviti
 function BookingPage() {
   const { id } = useParams();
   let carReserved = "";
@@ -21,7 +20,6 @@ function BookingPage() {
     car_name: '',
     payement: '',
     permis_number: ''
-    // agreeTerms: false
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -119,7 +117,6 @@ const [single, setCar] = useState([]);
           const end_date = new Date(formData.end_date);
           if (end_date > start_date) {
             const days = Math.ceil((end_date - start_date) / (1000 * 60 * 60 * 24));
-            console.log(days * single.price);
             return days * single.price;
           }
         }
@@ -378,7 +375,6 @@ const [single, setCar] = useState([]);
                   </label>
                 </div>
                 {errors.agreeTerms && <p className="text-red-500 text-sm mt-1">{errors.agreeTerms}</p>}
-                <input type="text" value={total} />
               </div>
               <button type="submit" className="btn w-full">
                 Confirmer la réservation
