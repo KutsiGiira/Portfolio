@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import { Card, Title, Text, Button, TextInput, Select, SelectItem } from '@tremor/react';
 import AddNewCar from './AddNewCar';
+import { message } from 'antd';
 function CarManagement() {
   const [cars, setCars] = useState([]);
   useEffect(() => {
@@ -9,7 +10,23 @@ function CarManagement() {
       .then(data => setCars(data))
       .catch(err => console.error('Error fetching cars:', err));
   }, []);
-
+function DeleteCar(id){
+  let del = confirm("are u sure about that ? ");
+  if(del === true){
+        fetch('http://localhost:8080/cars/del/' + id,{
+      method: "delete"
+      })
+      .then(setCars(prev => prev.filter(car => car.id !== id)))
+      .catch(console.error("Error not deleted"))
+      window.location.reload();
+    }
+  }
+  // const [status, setStatus] = useState([]);
+  //     function statusHandler(carId){
+  // setStatus(prevCars =>
+  //    prevCars.map(car => car.id === carId ? {...car, status: car.status === "Available" ? "Rented" : "Available"}: "Status not found"));
+  //    console.log("c")
+  //       }
 
   const [FormVis, setFormVis] = useState(false);
   function open() {
@@ -38,13 +55,12 @@ function CarManagement() {
                 <Text className="text-gray-500">{car.type}</Text>
               </div>
               <div className="flex items-center gap-4">
-                <span className={`px-2 py-1 rounded ${
-                  car.status === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                }`}>
+                <span className={`px-2 py-1 rounded ${car.status === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                   {car.status}
                 </span>
-                <Text>${car.price}/day</Text>
+                <Text>{car.price}$/day</Text>
                 <Button variant="secondary" size="xs">Edit</Button>
+                <Button variant="primary" size="xs" onClick={() => DeleteCar(car.id)}>Delete</Button>
               </div>
             </div>
           ))}

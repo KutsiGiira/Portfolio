@@ -147,7 +147,7 @@ const NewCar = ({ style, onClose }) => {
                 value={car.categories}
                 onChange={(value) => handleChange({ target: { name: 'categories', value } }, index)}
               >
-                <Select.Option value="Suv">Suv</Select.Option>
+                <Select.Option value="SUV">SUV</Select.Option>
                 <Select.Option value="Compacte">Compacte</Select.Option>
                 <Select.Option value="Electrique">Electrique</Select.Option>
               </Select>

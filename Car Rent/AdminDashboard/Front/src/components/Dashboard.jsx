@@ -16,6 +16,10 @@ useEffect(() => {
     .then(data => setToCos(data))
     .catch(err => console.log(err))
 }, [])
+const [Av, setAv] = useState([])
+useEffect(() => {
+  fetch('http://localhost:8080/cars/av').then(res => res.json()).then(data => setAv(data))
+})
 
 
   return (
@@ -29,8 +33,8 @@ useEffect(() => {
           <Metric className="text-blue-900">{totalCars.Total}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">Active Bookings</Text>
-          <Metric className="text-blue-900">8</Metric>
+          <Text className="text-blue-700">Available Cars</Text>
+          <Metric className="text-blue-900">{Av.AvNumber}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
           <Text className="text-blue-700">Total Customers</Text>
