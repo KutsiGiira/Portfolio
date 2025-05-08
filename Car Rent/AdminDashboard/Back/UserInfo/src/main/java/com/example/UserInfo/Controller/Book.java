@@ -19,7 +19,6 @@ public class Book {
     public List<Booking> book(){
         return brepo.findAll();
     }
-
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + bg);

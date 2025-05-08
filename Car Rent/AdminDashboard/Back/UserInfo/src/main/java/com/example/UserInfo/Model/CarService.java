@@ -11,10 +11,14 @@ public class CarService {
     @Autowired
     private ContactRepo contactRepo;
 
+
     public long CountAllCars(){
         return carrepo.CountAllCars();
     }
     public long getTotalCostumers(){
         return contactRepo.getTotalCostumers();
+    }
+    public long AvCars(){
+        return carrepo.Av();
     }
 }

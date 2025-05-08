@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -32,6 +33,13 @@ public class CarCont {
         response.put("Total", count);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("cars/av")
+    public ResponseEntity<Map<String, Long>> Avs(){
+        Map<String,Long> res = new HashMap<>();
+        res.put("AvNumber", carrepo.Av());
+        return ResponseEntity.ok(res);
+    }
     //end point to add cars
 
     @PostMapping("/cars")
@@ -44,5 +52,20 @@ public class CarCont {
     @GetMapping("/cars/{id}")
     public Car findbyId(@PathVariable Long id){
             return carrepo.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
+    }
+    @PatchMapping("/cars/edit/{id}")
+    public Car EditCar(@PathVariable Long id, @RequestBody Car carDetails) {
+        Optional<Car> CarUpdate = carrepo.findById(id);
+        if (carDetails.getPrice() != null) {
+            CarUpdate.get().setPrice(carDetails.getPrice());
+        }
+        if (carDetails.getName() != null) {
+            CarUpdate.get().setName(carDetails.getName());
+        }
+        return carrepo.save(CarUpdate.get());
+    }
+    @DeleteMapping("/cars/del/{id}")
+    public void carDelete(@PathVariable Long id){
+        carrepo.deleteById(id);
     }
 }
