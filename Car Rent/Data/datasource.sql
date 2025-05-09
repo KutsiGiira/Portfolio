@@ -43,3 +43,8 @@ CREATE TABLE contact (
     Sujet VARCHAR(40),
     Message TEXT
 );
+CREATE TABLE MonthlyBooking (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Enter_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    payement int
+);

@@ -20,18 +20,22 @@ function BookingManagement() {
       console.error("err " + error)
     })
   }, [])
-
   const ConfirmBooking = (id) => {
+    let conf = confirm("Commande confirmed ?")
+    if(conf){
     fetch("http://localhost:8080/confirm/" + id,{method: "DELETE"})
     .then(data => console.log("dazt" + data))
     .catch(err => console.error(err))
       window.location.reload();
+    }
   }
 
 // TSWIRA (user page , w lform li f db)
 // 9AD STATS (db.report)
-// kml 3la dash page (main) (total revenue / active booking)
+// kml 3la dash page (main) (total revenue)
 // car management Edit menu tbdl available w taman
+
+// jrb t9ad table jdida li katkhduk total d lkhlas w imta dkhlat db sff w main dir dak l7sab
 
   return (
     <div className="p-6">
@@ -51,7 +55,7 @@ function BookingManagement() {
                 <Text className="font-small text-center">{cus.permis_number}</Text>
                 <Text className="font-small text-center">A mount to pay : {cus.payement}$</Text>
               </div>
-              <button onClick={() => ConfirmBooking(cus.id)}>Confirmed</button>
+              <button onClick={() => ConfirmBooking(cus.id)} >Confirmed</button>
             </div>
           ))}
         </div>

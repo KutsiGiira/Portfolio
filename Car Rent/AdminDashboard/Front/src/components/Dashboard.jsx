@@ -1,7 +1,6 @@
 import { Card, Title, Text, Grid, Metric } from '@tremor/react';
 import { useEffect, useState } from 'react';
 function Dashboard() {
-  //ba9i lik t9ad  ActiveBooking w monthly review (jm3 ga3 l flos walakin l chher (i9d tmrdk 3tiha w9tha))
 const [totalCars, setTotal] = useState([])
   useEffect(() =>{
     fetch("http://localhost:8080/cars/count")
@@ -20,6 +19,11 @@ const [Av, setAv] = useState([])
 useEffect(() => {
   fetch('http://localhost:8080/cars/av').then(res => res.json()).then(data => setAv(data))
 })
+
+const [Sum, setSum] = useState([])
+useEffect(() => {
+  fetch('http://localhost:8080/booking/sumPayement').then(res => res.json()).then(data => setSum(data))
+}, [])
 
 
   return (
@@ -42,7 +46,7 @@ useEffect(() => {
         </Card>
         <Card decoration="top" decorationColor="blue">
           <Text className="text-blue-700">Monthly Revenue</Text>
-          <Metric className="text-blue-900">$12,450</Metric>
+          <Metric className="text-blue-900">{Sum.Sum}$</Metric>
         </Card>
       </Grid>
     </div>

@@ -4,9 +4,11 @@ import com.example.UserInfo.Model.Booking;
 import com.example.UserInfo.Model.BookingRepo;
 import com.example.UserInfo.Model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -36,5 +38,11 @@ public class Book {
             return "deleted";
         }
         return "Not found";
+    }
+    @GetMapping("/booking/sumPayement")
+    public ResponseEntity<HashMap<String, Long>> payementSum(){
+        HashMap<String, Long> sum = new HashMap<>();
+        sum.put("Sum", brepo.payement());
+        return ResponseEntity.ok(sum);
     }
 }

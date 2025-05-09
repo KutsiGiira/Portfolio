@@ -8,7 +8,7 @@ const { TextArea } = Input;
 const NewCar = ({ style, onClose }) => {
   const [carList, setCarList] = useState([
     {
-      // image: '',
+      image: '',
       name: '',
       price: '',
       status: '',
@@ -78,17 +78,16 @@ const NewCar = ({ style, onClose }) => {
           </Button>
         </Form.Item>
 
-        {/* <Form.Item label="Upload" valuePropName="fileList">
-          <Upload action="http://localhost:8080/cars/ups" listType="picture-card">
+        <Form.Item label="Upload" valuePropName="fileList">
+          <Upload name="file" action="http://localhost:8080/cars" listType="picture-card" accept="image/*">
             <button
               style={{ color: 'inherit', cursor: 'inherit', border: 0, background: 'none' }}
               type="button"
             >
-              <PlusOutlined />
-              <div>Car Pic</div>
+              <div>Upload Car Pic</div>
             </button>
           </Upload>
-        </Form.Item> */}
+        </Form.Item>
 
         {carList.map((car, index) => (
           <div key={index}>

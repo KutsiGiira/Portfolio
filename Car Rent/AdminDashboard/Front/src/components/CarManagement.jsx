@@ -21,6 +21,8 @@ function DeleteCar(id){
       window.location.reload();
     }
   }
+
+  //--------------function bach tbdl status dyal car--------------------------//
   // const [status, setStatus] = useState([]);
   //     function statusHandler(carId){
   // setStatus(prevCars =>
