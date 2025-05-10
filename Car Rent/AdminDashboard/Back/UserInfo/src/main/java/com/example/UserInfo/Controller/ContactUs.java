@@ -31,4 +31,8 @@ public class ContactUs {
     public Contact contact(@RequestBody Contact contact){
         return crepo.save(contact);
     }
+    @DeleteMapping("/contact/read/{id}")
+    public void read(@PathVariable int id){
+        crepo.deleteById(id);
+    }
 }

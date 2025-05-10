@@ -56,7 +56,6 @@ function ContactPage() {
     e.preventDefault();
   
     if (validateForm()) {
-      // Send form data to the backend
       fetch("http://localhost:8080/contact", {
         method: "POST",
         headers: {
