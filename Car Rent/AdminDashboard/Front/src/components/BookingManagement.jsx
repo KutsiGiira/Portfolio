@@ -29,14 +29,9 @@ function BookingManagement() {
       window.location.reload();
     }
   }
-
-// TSWIRA (user page , w lform li f db)
-// 9AD STATS (db.report)
-// kml 3la dash page (main) (total revenue)
-// car management Edit menu tbdl available w taman
-
-// jrb t9ad table jdida li katkhduk total d lkhlas w imta dkhlat db sff w main dir dak l7sab
-
+// TSWIRA (user page , w lform li f db) (3)
+// 9AD STATS (db.report) (4)
+// car management Edit menu tbdl available w taman (2)
   return (
     <div className="p-6">
       <Title>Booking Management</Title>

@@ -22,7 +22,7 @@ useEffect(() => {
 
 const [Sum, setSum] = useState([])
 useEffect(() => {
-  fetch('http://localhost:8080/booking/sumPayement').then(res => res.json()).then(data => setSum(data))
+  fetch('http://localhost:8080/calc/total').then(res => res.json()).then(data => setSum(data))
 }, [])
 
 
@@ -41,12 +41,12 @@ useEffect(() => {
           <Metric className="text-blue-900">{Av.AvNumber}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">Total Customers</Text>
+          <Text className="text-blue-700">New Messages</Text>
           <Metric className="text-blue-900">{totalCostumers.Costumers}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
           <Text className="text-blue-700">Monthly Revenue</Text>
-          <Metric className="text-blue-900">{Sum.Sum}$</Metric>
+          <Metric className="text-blue-900">{Sum.TotalPayement}$</Metric>
         </Card>
       </Grid>
     </div>

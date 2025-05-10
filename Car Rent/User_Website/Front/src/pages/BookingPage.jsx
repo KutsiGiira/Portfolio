@@ -137,6 +137,15 @@ const [single, setCar] = useState([]);
           car_name: single.name,
           payement: Number(totalCounter)
         };
+        const priceOnly ={
+          payement: Number(totalCounter)
+        };
+
+      fetch('http://localhost:8080/calc/payement',{method: 'POST', headers: {'Content-Type' : 'application/json'}, body: JSON.stringify(priceOnly)})
+      .then(res => res.json())
+      .then(dta => console.log(dta))
+      .catch(err => console.error("madaztch"))
+
       fetch('http://localhost:8080/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -170,10 +179,7 @@ const [single, setCar] = useState([]);
     }
   };
 
- 
-  
   const total = calculateTotal();
-  
   return (
     <div className="py-12 bg-gray-50">
       <div className="container-custom">
