@@ -59,8 +59,8 @@ public class CarCont {
         if (carDetails.getPrice() != null) {
             CarUpdate.get().setPrice(carDetails.getPrice());
         }
-        if (carDetails.getName() != null) {
-            CarUpdate.get().setName(carDetails.getName());
+        if (carDetails.getStatus() != null) {
+            CarUpdate.get().setStatus(carDetails.getStatus());
         }
         return carrepo.save(CarUpdate.get());
     }

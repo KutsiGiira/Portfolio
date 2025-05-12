@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import { Card, Title, Text, Button, TextInput, Select, SelectItem } from '@tremor/react';
 import AddNewCar from './AddNewCar';
+import CarEdit from './CarEdit';
 import { message } from 'antd';
 function CarManagement() {
   const [cars, setCars] = useState([]);
@@ -22,21 +23,21 @@ function DeleteCar(id){
     }
   }
 
-  //--------------function bach tbdl status dyal car--------------------------//
-  // const [status, setStatus] = useState([]);
-  //     function statusHandler(carId){
-  // setStatus(prevCars =>
-  //    prevCars.map(car => car.id === carId ? {...car, status: car.status === "Available" ? "Rented" : "Available"}: "Status not found"));
-  //    console.log("c")
-  //       }
 
   const [FormVis, setFormVis] = useState(false);
   function open() {
     setFormVis(true);
   }
-
   function close() {
     setFormVis(false);
+  }
+
+  const [Editor, setEditor] = useState(null);
+  function OpenEditor(id){
+    setEditor(id);
+  }
+  function CloseEditor(){
+    setEditor(null);
   }
   return (
     <div className="p-6" style={{zIndex: 1}}>
@@ -49,7 +50,7 @@ function DeleteCar(id){
       </div>
 
       <Card>
-        <div className="space-y-4" >
+        <div className="space-y-4" style={{zIndex: 3}}>
           {cars.map((car) => (
             <div key={car.id} className="flex items-center justify-between p-4 border-b">
               <div>
@@ -61,8 +62,11 @@ function DeleteCar(id){
                   {car.status}
                 </span>
                 <Text>{car.price}$/day</Text>
-                <Button variant="secondary" size="xs">Edit</Button>
+                {Editor === car.id && <CarEdit onClose={CloseEditor} id={car.id} />}
+                <Button variant="secondary" size="xs" onClick={() => OpenEditor(car.id)}>Edit</Button>
                 <Button variant="primary" size="xs" onClick={() => DeleteCar(car.id)}>Delete</Button>
+                <div>
+                </div>
               </div>
             </div>
           ))}

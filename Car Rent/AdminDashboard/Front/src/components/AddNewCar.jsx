@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import './Label.css'
 import { Form, Input, Button, InputNumber, Upload, message, Select } from 'antd';
 
 const { TextArea } = Input;
@@ -39,7 +38,7 @@ const NewCar = ({ style, onClose }) => {
         .then(res => res.json())
         .then(data => {
           console.log('Car added:', data);
-          message.success('Car added successfully');
+          message.success('Car added successfully'); //testi hadi chuf bdebt ach kadir chuf wach hada huwa lmsg li kaytl3 lik f lfu9
         })
         .catch(err => {
           console.error('Error:', err);
@@ -72,7 +71,6 @@ const NewCar = ({ style, onClose }) => {
               color: "#fff",
             }}
             onClick={onClose}
-            onMouseEnter={() => console.log("X Button Hovered")}
           >
             X
           </Button>

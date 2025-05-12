@@ -29,9 +29,8 @@ function BookingManagement() {
       window.location.reload();
     }
   }
-// TSWIRA (user page , w lform li f db) (3)
-// 9AD STATS (db.report) (4)
-// car management Edit menu tbdl available w taman (2)
+// TSWIRA (user page , w lform li f db) (1)
+// 9AD STATS (db.report) (2)
   return (
     <div className="p-6">
       <Title>Booking Management</Title>

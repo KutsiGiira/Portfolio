@@ -25,7 +25,7 @@ function Reports() {
             data={bookingData}
             index="month"
             categories={['bookings']}
-            colors={['blue']}
+            colors={["indigo", "cyan", "amber", "emerald"]}
             className="mt-6"
           />
         </Card>
