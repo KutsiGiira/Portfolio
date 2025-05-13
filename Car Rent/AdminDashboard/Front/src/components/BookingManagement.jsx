@@ -29,8 +29,7 @@ function BookingManagement() {
       window.location.reload();
     }
   }
-// TSWIRA (user page , w lform li f db) (1)
-// 9AD STATS (db.report) (2)
+// 9AD STATS (db.report) (1)
   return (
     <div className="p-6">
       <Title>Booking Management</Title>

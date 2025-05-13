@@ -3,7 +3,7 @@ function CarCard({ car }) {
   return (
     <div className="card hover:shadow-lg transition-shadow">
       <img 
-        src={car.image} 
+        src={`http://localhost:8080/images/${car.id}`} 
         alt={car.name} 
         className="w-full h-48 object-cover"
       />

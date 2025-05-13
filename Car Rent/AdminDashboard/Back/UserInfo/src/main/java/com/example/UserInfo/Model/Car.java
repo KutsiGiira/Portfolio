@@ -3,7 +3,6 @@ package com.example.UserInfo.Model;
 import jakarta.persistence.*;
 
 import java.util.Arrays;
-
 @Entity
 @Table(name="Car")
 public class Car {
@@ -20,7 +19,6 @@ public class Car {
     private String price;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
     private String description;
@@ -60,11 +58,8 @@ public class Car {
         this.carburant = carburant;
         this.caracteristique = caracteristique;
     }
-
     public Car() {
-
     }
-
 
     public Long getId() {
         return id;
@@ -167,9 +162,6 @@ public class Car {
         Diesel,
         Electrique
     }
-
-
-
     @Override
     public String toString() {
         return "Car{" +

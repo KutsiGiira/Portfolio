@@ -4,9 +4,17 @@ import com.example.UserInfo.Model.Booking;
 import com.example.UserInfo.Model.Car;
 import com.example.UserInfo.Model.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +33,16 @@ public class CarCont {
     public List<Car> cars() {
         return carrepo.findAll();
     }
-
+    @GetMapping("/images/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Car car = carrepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        byte[] image = car.getImage();  // your @Lob field
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)  // or MediaType.IMAGE_PNG
+                .body(image);
+    }
     @GetMapping("/cars/count")
     public ResponseEntity<Map<String, Long>> getCarCount() {
         long count = carrepo.CountAllCars();
@@ -41,11 +58,98 @@ public class CarCont {
         return ResponseEntity.ok(res);
     }
     //end point to add cars
+    @PostMapping(value = "/cars", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Car> uploadCar(
+            @RequestPart("file") MultipartFile file,
+            @RequestPart("name") String name,
+            @RequestPart("price") String price,
+            @RequestPart("status") String status,
+            @RequestPart("description") String description,
+            @RequestPart("transmition") String transmition,
+            @RequestPart("categories") String categories,
+            @RequestPart("carburant") String carburant,
+            @RequestPart("caracteristique") String caracteristique
+    ) throws IOException {
+        Car car = new Car();
+        car.setImage(file.getBytes());
+        car.setName(name);
+        car.setPrice(price);
+        car.setStatus(Car.Status.valueOf(status));
+        car.setDescription(description);
+        car.setTransmition(Car.Transmition.valueOf(transmition));
+        car.setCategories(Car.Categories.valueOf(categories));
+        car.setCarburant(Car.Carburant.valueOf(carburant));
+        car.setCaracteristique(caracteristique);
 
-    @PostMapping("/cars")
-    public Car carPost(@RequestBody Car car) {
-        return carrepo.save(car);
+        Car saved = carrepo.save(car);
+        return ResponseEntity.ok(saved);
     }
+
+//    @PostMapping("/cars")
+//    public ResponseEntity<String> carPost(@RequestBody Car car, @RequestParam("file") MultipartFile file){
+//        try {
+//            String fileName = file.getOriginalFilename();
+//            long fileSize = file.getSize();
+//
+//            // Optional: Save file to disk
+//            Path path = Paths.get("uploads/" + fileName);
+//            Files.write(path, file.getBytes());
+//
+//            return ResponseEntity.ok("File uploaded successfully: " + fileName + " (" + fileSize + " bytes)" + car);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Failed to upload image.");
+//        }
+//    }
+//        @PostMapping(value = "/cars", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//        public ResponseEntity<Car> uploadCar(
+//                @RequestPart("file") MultipartFile file,
+//                @RequestPart("name") String name,
+//                @RequestPart("price") String price,
+//                @RequestPart("status") String status,
+//                @RequestPart("description") String description,
+//                @RequestPart("transmition") String transmition,
+//                @RequestPart("categories") String categories,
+//                @RequestPart("carburant") String carburant,
+//                @RequestPart("caracteristique") String caracteristique
+//        ) {
+//
+//            return carrepo.save(car);
+//        }
+//@PostMapping(value = "/cars", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//public ResponseEntity<Car> uploadCar(
+//        @RequestPart("file") MultipartFile file, // MultipartFile to handle image
+//        @RequestPart("name") String name,
+//        @RequestPart("price") String price,
+//        @RequestPart("status") String status,
+//        @RequestPart("description") String description,
+//        @RequestPart("transmition") String transmition,
+//        @RequestPart("categories") String categories,
+//        @RequestPart("carburant") String carburant,
+//        @RequestPart("caracteristique") String caracteristique
+//) throws IOException {
+//    Car car = new Car();
+//
+//    // Convert MultipartFile to byte array
+//    car.setImage(file.getBytes());
+//    car.setName(name);
+//    car.setPrice(price);
+//    car.setStatus(Status.valueOf(status)); // Enum handling
+//    car.setDescription(description);
+//    car.setTransmition(Transmition.valueOf(transmition)); // Enum handling
+//    car.setCategories(Categories.valueOf(categories)); // Enum handling
+//    car.setCarburant(Carburant.valueOf(carburant)); // Enum handling
+//    car.setCaracteristique(caracteristique);
+//
+//    // Save the car to the repository
+//    carRepo.save(car);
+//
+//    return ResponseEntity.ok(car);
+//}
+
+
 
     //end point to get Single cars
 

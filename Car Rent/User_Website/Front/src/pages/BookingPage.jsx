@@ -393,13 +393,13 @@ const [single, setCar] = useState([]);
             <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
               <h2 className="text-xl font-semibold mb-6">Résumé de la réservation</h2>
               
-              <div className="flex items-center mb-6">
+              <div className="">
                 <img 
-                  src={single.image} 
+                  src={`http://localhost:8080/images/${car.id}`} 
                   alt={single.name} 
-                  className="w-20 h-20 object-cover rounded-md mr-4"
+                  className="w-30 h-30 bg-center bg-cover rounded-md mr-4"
                 />
-                <div>
+                <div><br></br>
                   <h3 className="font-bold">{single.name}</h3>
                   <p className="text-gray-600">{single.category}</p>
                 </div>
