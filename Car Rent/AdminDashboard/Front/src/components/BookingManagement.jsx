@@ -1,6 +1,6 @@
 import { Card, Title, Text, Badge } from '@tremor/react';
 import { useEffect , useState } from 'react';
-
+import checkSvg from '../assets/check.svg'
 function BookingManagement() {
   const [customer, setCustomer] = useState([])
 
@@ -36,19 +36,20 @@ function BookingManagement() {
       <Card className="mt-6">
         <div className="space-y-4">
           {customer.map((cus) => (
-            <div key={cus.id} className="flex items-center justify-between p-4 border-b">
+            <div key={cus.id} className="flex justify-between p-4 border-b">
               <div>
-                <Text className="text-xl">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">  {cus.email}</span></Text>
-                <Text className="text-sm">{cus.phone}</Text>
-                <Text className="text-gray-900">{cus.car_name}</Text>
+                <Text className="text-xl">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">{cus.email}</span></Text>
+                <Text className="text-lg text-gray-500 text-sm">{cus.phone}</Text>
+                <Text className="text-gray-900">La voiture: <span className='underline'>{cus.car_name}</span></Text>
+                <Text className="font-small">{cus.adresse}</Text>
+                <Text className="font-small">Montant : {cus.payement}$</Text>
               </div>
               <div>
                 <Text><span className='text-gray-500'>From : </span>{cus.start_date} <span className='text-gray-500'>To : </span> {cus.end_date}</Text>
-                <Text className="font-small text-center">{cus.ville}</Text>
-                <Text className="font-small text-center">{cus.permis_number}</Text>
-                <Text className="font-small text-center">A mount to pay : {cus.payement}$</Text>
+                <Text className="font-small"><span className='text-gray-500'>Code postal: </span>{cus.code_postal}</Text>
+                <Text className="font-small"><span className='text-gray-500'>Numero permis:  </span>{cus.permis_number}</Text>
               </div>
-              <button onClick={() => ConfirmBooking(cus.id)} >Confirmed</button>
+              <button onClick={() => ConfirmBooking(cus.id)}>Confirmed <img src={checkSvg} className='bg-green-800 rounded-lg'/></button>
             </div>
           ))}
         </div>

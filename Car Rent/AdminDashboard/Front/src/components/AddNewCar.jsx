@@ -44,8 +44,8 @@ const NewCar = ({ style, onClose }) => {
   };
 
   return (
-    <div style={{ zIndex: 2, position: "absolute", left: "50%", transform: "translateX(-50%)", borderRadius: "20px", color: "white", display: style }} className="flex-1 overflow-auto bg-blue-900">
-      <Form labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900 }} onFinish={handleSubmit}>
+    <div style={{ zIndex: 2, position: "absolute", left: "50%",top:"20px", transform: "translateX(-50%)", borderRadius: "20px", color: "white", display: style }} className="flex-1 overflow-auto bg-blue-100">
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900}} onFinish={handleSubmit}>
         <Form.Item>
           <Button style={{ position: "absolute", right: "-350px", top: "10px", border: "none", borderRadius: "60px", backgroundColor: "#f00", color: "#fff" }} onClick={onClose}>
             X
@@ -53,8 +53,8 @@ const NewCar = ({ style, onClose }) => {
         </Form.Item>
 
         <Form.Item label="Upload">
-          <Upload beforeUpload={(file) => { setImageFile(file); return false; }} listType="picture-card">
-            <div>Upload Car Pic</div>
+          <Upload beforeUpload={(file) => { setImageFile(file); return false; }} listType="picture-card" >
+            <div className='flex justify-center w-[100px] h-[100px] rounded-lg items-center bg-blue-100'>+</div>
           </Upload>
         </Form.Item>
 
@@ -74,7 +74,7 @@ const NewCar = ({ style, onClose }) => {
         </Form.Item>
 
         <Form.Item label="Description">
-          <TextArea rows={4} value={car.description} onChange={(e) => handleChange('description', e.target.value)} />
+          <TextArea rows={2} value={car.description} onChange={(e) => handleChange('description', e.target.value)} />
         </Form.Item>
 
         <Form.Item label="Transmition">
@@ -101,7 +101,7 @@ const NewCar = ({ style, onClose }) => {
         </Form.Item>
 
         <Form.Item label="Caracteristique">
-          <TextArea rows={4} value={car.caracteristique} onChange={(e) => handleChange('caracteristique', e.target.value)} />
+          <TextArea rows={2} value={car.caracteristique} onChange={(e) => handleChange('caracteristique', e.target.value)} />
         </Form.Item>
 
         <Form.Item>
