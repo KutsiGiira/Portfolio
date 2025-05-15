@@ -13,11 +13,10 @@ function HomePage() {
       .catch(err => console.error('Error fetching cars:', err));
   }, []);
 
-  const featuredCars = single.slice(0, 3);
+  const featuredCars = single.slice(0, 6);
   
   return (
     <div>
-      {/* hadi ma3ndha tachi 3ala9a b tomobilat */}
       <Hero />
       <Features /> 
       

@@ -12,7 +12,7 @@ function CarManagement() {
       .catch(err => console.error('Error fetching cars:', err));
   }, []);
 function DeleteCar(id){
-  let del = confirm("are u sure about that ? ");
+  let del = confirm("ce véhicule sera supprimé ");
   if(del === true){
         fetch('http://localhost:8080/cars/del/' + id,{
       method: "delete"
@@ -42,7 +42,7 @@ function DeleteCar(id){
   return (
     <div className="p-6" style={{zIndex: 1}}>
       <div className="flex justify-between items-center mb-6">
-        <Title>Car Management</Title>
+        <Title>Gestion de voitures</Title>
         <Button style={{position: 'absolute', left: "90%"}} onClick={open}>Add New Car</Button>
         <div>
         {FormVis && <AddNewCar onClose={close} />}
@@ -63,8 +63,8 @@ function DeleteCar(id){
                 </span>
                 <Text>{car.price}$/day</Text>
                 {Editor === car.id && <CarEdit onClose={CloseEditor} id={car.id} />}
-                <Button variant="secondary" size="xs" onClick={() => OpenEditor(car.id)}>Edit</Button>
-                <Button variant="primary" size="xs" onClick={() => DeleteCar(car.id)}>Delete</Button>
+                <Button variant="secondary" size="xs" onClick={() => OpenEditor(car.id)}>Modifier</Button>
+                <Button variant="primary" size="xs" onClick={() => DeleteCar(car.id)}>Supprimer</Button>
                 <div>
                 </div>
               </div>

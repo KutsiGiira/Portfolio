@@ -33,8 +33,8 @@ function isEmpty(){
             <input type="text" name="price" value={upd.price} onChange={(e) => setUpd({...upd, price: e.target.value})} />
             <select name="status" value={upd.status} onChange={(e) => setUpd({...upd, status: e.target.value})}>
                 <option disabled></option>
-                <option value="Available">Available</option>
-                <option value="Rented">Rented</option>
+                <option value="Available">Disponible</option>
+                <option value="Rented">loué</option>
             </select>
             <button type="submit" onClick={HandleSubmit}>Update</button>
                 </section>

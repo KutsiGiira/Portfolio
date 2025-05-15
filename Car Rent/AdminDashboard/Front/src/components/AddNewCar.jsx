@@ -58,18 +58,18 @@ const NewCar = ({ style, onClose }) => {
           </Upload>
         </Form.Item>
 
-        <Form.Item label="Car Name">
+        <Form.Item label="Nom de voiture">
           <Input value={car.name} onChange={(e) => handleChange('name', e.target.value)} />
         </Form.Item>
 
-        <Form.Item label="Price">
+        <Form.Item label="Prix">
           <InputNumber value={car.price} onChange={(value) => handleChange('price', value)} />
         </Form.Item>
 
         <Form.Item label="Status">
           <Select value={car.status} onChange={(value) => handleChange('status', value)}>
-            <Select.Option value="Available">Available</Select.Option>
-            <Select.Option value="Rented">Rented</Select.Option>
+            <Select.Option value="Available">Disponible</Select.Option>
+            <Select.Option value="Rented">loué</Select.Option>
           </Select>
         </Form.Item>
 

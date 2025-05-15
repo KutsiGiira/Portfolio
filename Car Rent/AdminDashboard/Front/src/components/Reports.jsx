@@ -14,6 +14,10 @@ function Reports() {
     { name: 'Luxury', value: 15 },
   ];
 
+  //total rents each month
+  //revenue each month
+
+
   return (
     <div className="p-6">
       <Title>Reports & Analytics</Title>

@@ -13,10 +13,10 @@ function Sidebar() {
 
   const navigation = [
     { name: 'Dashboard', icon: HomeIcon, path: '/' },
-    { name: 'Cars', icon: TruckIcon, path: '/cars' },
-    { name: 'Bookings', icon: CalendarIcon, path: '/bookings' },
-    { name: 'Customers', icon: UserGroupIcon, path: '/customers' },
-    { name: 'Reports', icon: ChartBarIcon, path: '/reports' },
+    { name: 'Voitures', icon: TruckIcon, path: '/cars' },
+    { name: 'Réservation', icon: CalendarIcon, path: '/bookings' },
+    { name: 'Clients', icon: UserGroupIcon, path: '/customers' },
+    { name: 'Statistiques', icon: ChartBarIcon, path: '/reports' },
   ];
 
   return (

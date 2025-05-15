@@ -27,10 +27,9 @@ function CustomerDatabase() {
     .then(console.log("tm7at"))
     window.location.reload();
   }
-// had lpage t9adat la biti t9ad ba9i desigh liha 7sn mhm tal db mzyan
   return (
     <div className="p-6">
-      <Title>Customer Database</Title>
+      <Title>Messages</Title>
       <div className="mt-6 mb-4">
         <TextInput placeholder="Search customers..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
@@ -49,7 +48,7 @@ function CustomerDatabase() {
               </div>
             </div>
           ))): (
-            <Text className="text-center text-gray-500">No customers found.</Text>
+            <Text className="text-center text-gray-500">Non nouveaux message.</Text>
           )}
         </div>
       </Card>

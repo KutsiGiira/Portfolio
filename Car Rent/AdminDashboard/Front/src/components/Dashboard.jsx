@@ -28,24 +28,24 @@ useEffect(() => {
 
   return (
     <div className="p-6 bg-blue-50">
-      <Title className="text-blue-900">Dashboard Overview</Title>
-      <Text className="text-blue-700">Welcome to your car rental management system</Text>
+      <Title className="text-blue-900">Tableau de bord</Title>
+      <Text className="text-blue-700">Bienvenue dans votre système de gestion de location de voitures</Text>
       
       <Grid numItems={1} numItemsSm={2} numItemsLg={4} className="gap-6 mt-6">
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">Total Cars</Text>
+          <Text className="text-blue-700">Total Voitures</Text>
           <Metric className="text-blue-900">{totalCars.Total}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">Available Cars</Text>
+          <Text className="text-blue-700">Voitures Disponible</Text>
           <Metric className="text-blue-900">{Av.AvNumber}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">New Messages</Text>
+          <Text className="text-blue-700">Nouveaux messages</Text>
           <Metric className="text-blue-900">{totalCostumers.Costumers}</Metric>
         </Card>
         <Card decoration="top" decorationColor="blue">
-          <Text className="text-blue-700">Monthly Revenue</Text>
+          <Text className="text-blue-700">Revenu mensuel</Text>
           <Metric className="text-blue-900">{Sum.TotalPayement}$</Metric>
         </Card>
       </Grid>

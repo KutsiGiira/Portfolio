@@ -21,7 +21,7 @@ function BookingManagement() {
     })
   }, [])
   const ConfirmBooking = (id) => {
-    let conf = confirm("Commande confirmed ?")
+    let conf = confirm("Client appelé ?")
     if(conf){
     fetch("http://localhost:8080/confirm/" + id,{method: "DELETE"})
     .then(data => console.log("dazt" + data))
@@ -32,24 +32,23 @@ function BookingManagement() {
 // 9AD STATS (db.report) (1)
   return (
     <div className="p-6">
-      <Title>Booking Management</Title>
+      <Title>Gestion de reservation du client</Title>
       <Card className="mt-6">
         <div className="space-y-4">
           {customer.map((cus) => (
             <div key={cus.id} className="flex justify-between p-4 border-b">
               <div>
-                <Text className="text-xl">{cus.fname +" "+ cus.lname}<span className="text-gray-500 text-sm">{cus.email}</span></Text>
-                <Text className="text-lg text-gray-500 text-sm">{cus.phone}</Text>
-                <Text className="text-gray-900">La voiture: <span className='underline'>{cus.car_name}</span></Text>
-                <Text className="font-small">{cus.adresse}</Text>
-                <Text className="font-small">Montant : {cus.payement}$</Text>
+                <Text className="text-xl font">{cus.fname +" "+ cus.lname} <span className="text-gray-600 text-sm">{cus.email}</span></Text>
+                <Text className="text-lg text-gray-900 text-md"><span className='text-gray-500'>Tel : </span>{cus.phone}</Text>
+                <Text className="text-gray-900"><span className='text-gray-500'>Voiture : </span><span className='font-bold'>{cus.car_name}</span></Text>
+                <Text className="text-gray-900"><span className='text-gray-500'>Address : </span>{cus.adresse}</Text>
+                <Text className="text-gray-900"><span className='text-gray-500'>Montant : </span>{cus.payement}$</Text>
+                <Text><span className='text-gray-500'>From : </span>{cus.start_date}
+                      <span className='text-gray-500'> To : </span> {cus.end_date}</Text>
+                <Text className="text-gray-900"><span className='text-gray-500'>Code postal: </span>{cus.code_postal}</Text>
+                <Text className="text-gray-900"><span className='text-gray-500'>Numero permis:  </span>{cus.permis_number}</Text>
               </div>
-              <div>
-                <Text><span className='text-gray-500'>From : </span>{cus.start_date} <span className='text-gray-500'>To : </span> {cus.end_date}</Text>
-                <Text className="font-small"><span className='text-gray-500'>Code postal: </span>{cus.code_postal}</Text>
-                <Text className="font-small"><span className='text-gray-500'>Numero permis:  </span>{cus.permis_number}</Text>
-              </div>
-              <button onClick={() => ConfirmBooking(cus.id)}>Confirmed <img src={checkSvg} className='bg-green-800 rounded-lg'/></button>
+              <button onClick={() => ConfirmBooking(cus.id)} className='flex justify-between w-[80px] h-[150px] items-center'>Appelé<img src={checkSvg} className='bg-green-800 rounded-lg h-[20px] w-[20px]'/></button>
             </div>
           ))}
         </div>
