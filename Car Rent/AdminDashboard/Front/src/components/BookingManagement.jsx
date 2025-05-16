@@ -29,7 +29,6 @@ function BookingManagement() {
       window.location.reload();
     }
   }
-// 9AD STATS (db.report) (1)
   return (
     <div className="p-6">
       <Title>Gestion de reservation du client</Title>

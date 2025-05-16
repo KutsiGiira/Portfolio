@@ -22,8 +22,8 @@ public class MonthlyCont {
     public ResponseEntity<HashMap<String, Long>> s(){
         HashMap<String, Long> tot = new HashMap<>();
         tot.put("TotalPayement", mrepo.sum());
-        System.out.println(mrepo.sum());
-            return ResponseEntity.ok(tot);
+        tot.put("Month", mrepo.month());
+        return ResponseEntity.ok(tot);
     }
     @PostMapping("/payement")
     public MonthlyBooking insert(@RequestBody MonthlyBooking monthlyBooking){

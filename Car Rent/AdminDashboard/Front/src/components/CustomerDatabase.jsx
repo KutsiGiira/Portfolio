@@ -55,5 +55,4 @@ function CustomerDatabase() {
     </div>
   );
 }
-
 export default CustomerDatabase;

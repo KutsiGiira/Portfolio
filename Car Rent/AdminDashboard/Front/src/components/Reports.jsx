@@ -1,47 +1,81 @@
-import { Card, Title, BarChart, DonutChart } from '@tremor/react';
+import { useEffect, useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import { Card, Title } from "@tremor/react";
 
 function Reports() {
   const bookingData = [
-    { month: 'Jan', bookings: 45 },
-    { month: 'Feb', bookings: 52 },
+    { month: 'Jan', bookings: 20 },
+    { month: 'Feb', bookings: 32 },
     { month: 'Mar', bookings: 48 },
+    { month: 'Apr', bookings: 39 },
+    { month: 'May', bookings: 50 },
+    { month: 'Jun', bookings: 60 },
   ];
+  const [tot, setTot] = useState([]);
 
-  const carTypeData = [
-    { name: 'Sedan', value: 40 },
-    { name: 'SUV', value: 30 },
-    { name: 'Van', value: 15 },
-    { name: 'Luxury', value: 15 },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:8080/calc/total")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const monthNames = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        const formatted = [{
+          Month: monthNames[data.Month - 1],
+          TotalPayement: data.TotalPayement
+        }];
 
-  //total rents each month
-  //revenue each month
-
+        setTot(formatted);
+      })
+      .catch((err) => console.error("Fetch error:", err));
+  }, []);
 
   return (
     <div className="p-6">
-      <Title>Reports & Analytics</Title>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <Card>
-          <Title>Monthly Bookings</Title>
-          <BarChart
-            data={bookingData}
-            index="month"
-            categories={['bookings']}
-            colors={["indigo", "cyan", "amber", "emerald"]}
-            className="mt-6"
-          />
+      <Title>Rapports et analyses</Title>
+      <div className="flex flex-col gap-6 mt-6 ">
+        <Card className="w-fit">
+          <Title>Revenu mensuel dernier chaque mois</Title>
+          {tot.length === 0 ? (
+            <p className="text-center text-gray-500">Chargement...</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <LineChart width={800} height={400} data={tot}>
+                <XAxis dataKey="Month" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="TotalPayement"
+                  stroke="blue"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </div>
+          )}
         </Card>
-
-        <Card>
-          <Title>Car Type Distribution</Title>
-          <DonutChart
-            data={carTypeData}
-            category="value"
-            index="name"
-            className="mt-6"
-          />
+            {/* test of the chart with data */}
+        <Card className="w-fit">
+          <Title>Revenu mensuel dernier chaque mois</Title>
+          {tot.length === 0 ? (
+            <p className="text-center text-gray-500">Chargement...</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <LineChart width={800} height={400} data={bookingData}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="bookings"
+                  stroke="blue"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </div>
+          )}
         </Card>
       </div>
     </div>
