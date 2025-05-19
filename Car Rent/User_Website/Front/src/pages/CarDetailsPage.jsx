@@ -133,7 +133,7 @@ function CarDetailsPage() {
               .map(similarCar => (
                 <div key={similarCar.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   <img 
-                    src={similarCar.image} 
+                    src={`http://localhost:8080/images/${similarCar.id}`}
                     alt={similarCar.name} 
                     className="w-full h-48 object-cover"
                   />
