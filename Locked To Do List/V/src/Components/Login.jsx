@@ -26,10 +26,29 @@ function Login(){
             newerror.password = "! please enter password"
         }
       setError(newerror);
-        if (Object.keys(newerror).length === 0) {
-    navigate("/todo");
+                if (Object.keys(newerror).length === 0) {
+                    fetch('http://localhost:8080/login', {method: "POST", headers :{
+                        "Content-Type": "application/json"
+                    },
+                      credentials: "include",
+                    body: JSON.stringify(form)
+                })
+                    .then(res => {
+                    if (res.status === 401) {
+                        throw new Error("Unauthorized: Invalid username or password");
+                    }
+                    if (!res.ok) {
+                        throw new Error("Something went wrong");
+                    }
+                    if(res.ok){
+                        console.log("logged")
+                    }
+                    return res.json();
+                    })
+                .then(() => navigate("/todos"))
+                .catch(err => setError({ general: err.message }));
+        }
   }
-}
     return(
         // bg-[#F8E7F6]
     <div className="bg-purple-100 w-screen h-screen flex items-center justify-center ">
@@ -41,6 +60,7 @@ function Login(){
                 </section>
             <section className="bg-white w-[60%] h-full rounded-tr-2xl rounded-br-2xl flex justify-center items-center text-purple-700 flex-col">
                 <h1 className="text-4xl mb-5">Login to Your Lock List</h1>
+                {error.general && (<p className="text-center text-red-600 mb-2">{error.general}</p>)}
                 <input type="text" name='username' value={form.username} onChange={handleChange} className="border-purple border-1 w-[60%] rounded-md pl-2 pr-2 mt-4 mb-2" placeholder="Username"/>
                 <p className="text-center text-red-600 mb-2">{error.username}</p>
                 <input type="text" name='password' value={form.password} onChange={handleChange} className="border-purple border-1 w-[60%] rounded-md pl-2 pr-2 mb-2" placeholder="Password"/>
