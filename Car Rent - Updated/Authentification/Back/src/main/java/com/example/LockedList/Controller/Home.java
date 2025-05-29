@@ -52,7 +52,6 @@ public class Home {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    //sff rah t9adat la biti tzid modifications 3la token + 9ad db l front + 9ad table folder
     @PatchMapping("/update/{id}")
     public ResponseEntity<String> password(@PathVariable Long id, @RequestBody Map<String, String> body){
         try {
