@@ -128,7 +128,7 @@ function CarDetailsPage() {
           <h2 className="text-2xl font-bold mb-6">Voitures similaires</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {cars
-              .filter(c => c.id !== car.id && c.categories === car.categories)
+              .filter(c => c.id !== car.id)
               .slice(0, 10)
               .map(similarCar => (
                 <div key={similarCar.id} className="bg-white rounded-lg shadow-md overflow-hidden">
