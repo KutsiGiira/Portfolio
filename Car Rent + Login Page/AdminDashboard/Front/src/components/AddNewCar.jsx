@@ -44,10 +44,10 @@ const NewCar = ({ style, onClose }) => {
   };
 
   return (
-    <div style={{ zIndex: 2, position: "absolute", left: "50%",top:"20px", transform: "translateX(-50%)", borderRadius: "20px", color: "white", display: style }} className="flex-1 overflow-auto bg-blue-100">
-      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900}} onFinish={handleSubmit}>
+    <div style={{ zIndex: 2, position: "absolute", left: "50%",top:"20px", transform: "translateX(-50%)", borderRadius: "20px", color: "white", display: style }} className=" flex-1 overflow-auto bg-gradient-to-r from-[#155E8D] to-[#0F3F74]">
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} style={{ minWidth: 900}} onFinish={handleSubmit} >
         <Form.Item>
-          <Button style={{ position: "absolute", right: "-350px", top: "10px", border: "none", borderRadius: "60px", backgroundColor: "#f00", color: "#fff" }} onClick={onClose}>
+          <Button style={{ position: "absolute", right: "-350px", top: "10px", border: "none", borderRadius: "60px",background: "linear-gradient(to right,#1B7CA5,#229ABD)",  color: "white" }} onClick={onClose}>
             X
           </Button>
         </Form.Item>
@@ -105,7 +105,15 @@ const NewCar = ({ style, onClose }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ position: "absolute", left: "80%", border: "none", borderRadius: "100px" }}>
+          <Button type="primary" htmlType="submit" style={{  position: "absolute",
+    left: "80%",
+    padding: "10px 24px",
+    background: "linear-gradient(to right,#1B7CA5,#229ABD)",
+    border: "none",
+    borderRadius: "50px",
+    color: "#fff",
+    fontWeight: "bold",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)" }}>
             Submit
           </Button>
         </Form.Item>

@@ -20,7 +20,7 @@ function Sidebar() {
   ];
 
   return (
-    <div className="w-64 bg-blue-900 text-white shadow-lg">
+    <div className="w-64 bg-gradient-to-r from-[#155E8D] to-[#0F3F74] text-white shadow-lg">
       <div className="p-4">
         <img 
           src={logo} 
@@ -35,8 +35,8 @@ function Sidebar() {
             <Link
               key={item.name}
               to={item.path}
-              className={`flex items-center px-4 py-3 hover:bg-blue-800 ${
-                isActive ? 'bg-blue-800' : ''
+              className={`flex items-center px-4 py-3 hover:bg-gradient-to-r from-[#0F3F74] to-[#155E8D] ${
+                isActive ? 'bg-gradient-to-r from-[#0F3F74] to-[#155E8D]' : ''
               }`}
             >
               <item.icon className="w-6 h-6 mr-3" />
