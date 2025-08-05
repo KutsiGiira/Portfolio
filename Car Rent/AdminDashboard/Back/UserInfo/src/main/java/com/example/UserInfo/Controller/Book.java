@@ -23,7 +23,7 @@ public class Book {
     }
     @PostMapping("/booking")
     public Booking reserv(@RequestBody Booking bg){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + bg);
+        System.out.println("Car booked" + bg);
         return brepo.save(bg);
     }
 
