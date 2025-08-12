@@ -1,13 +1,18 @@
-<aside>
-    <section>
-        <img [src]="logoPic" alt="Feather" width="100"/>
-        <h1>notes</h1>
-    </section>
-    <section>
-        <app-notes></app-notes>
-        <app-archive></app-archive>
-    </section>
-    <section>
-
-    </section>
-</aside>
+<section class="flex">
+<mat-sidenav-container class="h-screen">
+  <!-- SIDEBAR -->
+  <mat-sidenav mode="side" opened class="bg-green-900 text-white w-64 p-4">
+    <div class="flex items-center mb-4">
+      <img [src]="logoPic" alt="Logo" class="w-10 h-10 mr-2">
+      <h1 class="text-xl font-bold">Notes</h1>
+    </div>
+    <mat-nav-list>
+<a mat-list-item routerLink="/notes" routerLinkActive="active">Notes</a>
+<a mat-list-item routerLink="/archive" routerLinkActive="active">Archive</a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+<section>
+    <router-outlet/>
+</section>
+</section>
