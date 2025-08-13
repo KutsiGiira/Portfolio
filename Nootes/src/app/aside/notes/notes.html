@@ -1,1 +1,35 @@
-<p>notes works!</p>
+<main class="">
+    <section class="bg-pink-100 w-[95%] flex justify-between border-b-1">
+            <span class="">All Notes</span>
+            <span class="flex">
+                <input type="text" placeholder="Search by title, content,or tags..." class="border mb-4">
+                <div>icon</div>
+            </span>
+    </section>
+    <section class="flex w-[98%] bg-yellow-200 h-fit justify-between">
+        <div>
+            <button class="bg-blue-600 text-white">+ Create New Nots</button>
+            <div>
+                <ul>
+                    @for (note of Notes; track note.id) {
+                        <li (click)="selectNote(note)" class="cursor-pointer" >
+                            {{note.title}}
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div>
+            @if(selectedNote){
+                {{selectedNote.content}}
+            }
+            @else{
+                <p>Select a note or add new one</p>
+            }
+        </div>
+        <div class="bg-pink-100 flex flex-col gap-5">
+            <button class="border p-10">Archive Note</button>
+            <button class="border p-10">Delete Note</button>
+        </div>
+    </section>
+</main>

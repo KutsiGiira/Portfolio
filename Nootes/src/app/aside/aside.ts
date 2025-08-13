@@ -15,5 +15,5 @@ import { RouterLink, RouterModule, RouterOutlet } from "@angular/router";
   styleUrl: './aside.css'
 })
 export class Aside {
-     logoPic = 'assets/f.png';
+logoPic = "assets\images\f.png"
 }

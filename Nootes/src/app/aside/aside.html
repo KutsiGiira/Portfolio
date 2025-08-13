@@ -1,18 +1,26 @@
 <section class="flex">
-<mat-sidenav-container class="h-screen">
-  <!-- SIDEBAR -->
-  <mat-sidenav mode="side" opened class="bg-green-900 text-white w-64 p-4">
-    <div class="flex items-center mb-4">
+<mat-sidenav-container class="h-screen border-r w-[15%]">
+    <!-- SIDEBAR -->
+    <mat-sidenav mode="side" opened >
+      <div class="flex items-center mb-4">
       <img [src]="logoPic" alt="Logo" class="w-10 h-10 mr-2">
-      <h1 class="text-xl font-bold">Notes</h1>
-    </div>
-    <mat-nav-list>
-<a mat-list-item routerLink="/notes" routerLinkActive="active">Notes</a>
-<a mat-list-item routerLink="/archive" routerLinkActive="active">Archive</a>
-    </mat-nav-list>
-  </mat-sidenav>
-</mat-sidenav-container>
-<section>
+        <h1 class="text-xl font-bold">Notes</h1>
+      </div>
+      <div>
+      <mat-nav-list class="bg-pink-100 w-[78%]">
+  <a mat-list-item routerLink="/notes" routerLinkActive="active">Notes</a>
+  <a mat-list-item routerLink="/archive" routerLinkActive="active">Archive</a>
+      </mat-nav-list>
+      </div>
+      <div>
+        <hr>
+        <section>
+        tags
+      </section>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+  <section class="bg-green-100 w-[88%]">
     <router-outlet/>
-</section>
+  </section>
 </section>

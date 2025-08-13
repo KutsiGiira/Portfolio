@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterModule, RouterOutlet } from "@angular/router";
 @Component({
   selector: 'app-root',
-    imports: [MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, RouterLink, RouterModule, Aside],
+    imports: [MatSidenavModule, MatToolbarModule, MatListModule,MatSidenavContent, MatIconModule, RouterLink,RouterOutlet, RouterModule, Aside],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
