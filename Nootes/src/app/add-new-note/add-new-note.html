@@ -1,0 +1,18 @@
+<div class="backdrop bg-blue-600">
+        <h1>Add New Note</h1>
+        <form (ngSubmit) = "onSubmit()">
+            <label>Title</label>
+            <input type="text" placeholder="Title" name="title" [(ngModel)]="title">
+
+            <label>Tages</label>
+            <input type="text" placeholder="Tages" name="tages" [(ngModel)]="tages">
+
+            <label>Date</label>
+            <input type="date" placeholder="Date" name="date" [(ngModel)]="date">
+
+            <label>Content</label>
+            <input type="text" placeholder="Content" name="content" [(ngModel)]="content">
+            <button type="submit">Create</button>
+        </form>
+    <button class="bg-red-600" (click)="onClose()">Close</button>
+</div>

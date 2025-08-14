@@ -8,7 +8,7 @@
     </section>
     <section class="flex w-[98%] bg-yellow-200 h-fit justify-between">
         <div>
-            <button class="bg-blue-600 text-white">+ Create New Nots</button>
+            <button class="bg-blue-600 text-white cursor-pointer" (click)="addNewTaskForm()">+ Create New Notes</button>
             <div>
                 <ul>
                     @for (note of Notes; track note.id) {
@@ -29,7 +29,12 @@
         </div>
         <div class="bg-pink-100 flex flex-col gap-5">
             <button class="border p-10">Archive Note</button>
-            <button class="border p-10">Delete Note</button>
+            <button class="border p-10" (click)="deleteNote(selectedNote.id)" [disabled]="!selectedNote">Delete Note</button>
         </div>
     </section>
 </main>
+<section>
+    @if(AddTask){
+        <app-new (close)="closeAddTaskForm()" (add)="AddNewNote($event)"></app-new>
+    }
+</section>
