@@ -7,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './archive.css'
 })
 export class Archive {
-
+  ArchivedNotes: any[] = [];
+  ngOnInit(){
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    const ArchiveNotes = localStorage.getItem("archivedNotes");
+    console.log(ArchiveNotes);
+    if(ArchiveNotes){
+      this.ArchivedNotes = JSON.parse(ArchiveNotes);
+    }
+  }
+  }
 }

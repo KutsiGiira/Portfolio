@@ -1,1 +1,5 @@
-<p>archive works!</p>
+<ul>
+  @for (note of ArchivedNotes; track note.id) {
+    <li >{{ note.title }}</li>
+  }
+</ul>

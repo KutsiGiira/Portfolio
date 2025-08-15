@@ -9,11 +9,11 @@ import {FormsModule} from '@angular/forms'
 export class AddNewNote {
   @Output() close = new EventEmitter<void>();
   @Output() add = new EventEmitter<{title: string; tages: string; date: string; content: string}>();
+  @Output() closeForm = new EventEmitter<void>()
   title= ''; tages= ''; date = ''; content = '';
   onClose(){
     this.close.emit()
   }
-
   onSubmit(){
     const data= {
       title: this.title,
@@ -22,6 +22,6 @@ export class AddNewNote {
       content: this.content
     };
     this.add.emit(data);
-        console.log("Emitted note:", data);
+    this.close.emit();
   }
 }

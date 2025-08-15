@@ -1,68 +1,56 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { AddNewNote } from "../../add-new-note/add-new-note";
-import { loadEnvFile } from 'process';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-notes',
-  imports: [AddNewNote],
+  imports: [AddNewNote, FormsModule],
   templateUrl: './notes.html',
   styleUrl: './notes.css'
 })
 export class Notes {
 selectedNote: any = null;
 AddTask = false;
-  // Notes= [
-  //   {
-  //     id:'note 1',
-  //     title: 'React Perfomance Optimatization',
-  //     tages: 'Dev, React',
-  //     date: '28 Oct 2025',
-  //     content: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-  //   },
-  //   {
-  //     id:'note 2',
-  //     title: 'japan trip',
-  //     tages: 'Travel, Personal',
-  //     date: '29 Oct 2025',
-  //     content: 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj'
-  //   },
-  //   {
-  //     id:'note 3',
-  //     title: 'Fitness Goals 2025',
-  //     tages: 'Fitnes, Health',
-  //     date: '25 Oct 2025',
-  //     content: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
-  //   },
-  //   {
-  //     id:'note 4',
-  //     title: 'Reading List',
-  //     tages: 'Dev, Personal]',
-  //     date: '5 Oct 2025',
-  //     content: 'RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR'
-  //   }
-  // ]
+archivedNotes: any[] = [];
+Notes: any[] = [];
+search!: string;
+filteredNotes: any[] = []
 
-  Notes: any[] = [];
   ngOnInit(){
-    const StoredNotes = localStorage.getItem("Notes");
-    console.log(StoredNotes)
-    if(StoredNotes){
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const StoredNotes = localStorage.getItem("Notes");
+      this.filteredNotes = [...this.Notes]
+      this.archivedNotes = JSON.parse(localStorage.getItem('archivedNotes') || '[]');
+      if(StoredNotes){
       this.Notes = JSON.parse(StoredNotes);
+      }
     }
   }
-selectNote(note: any) {
-  this.selectedNote = note;
-  console.log("d");
-  console.log(note)
+  filterNotes(){
+    const trim = this.search.toLowerCase().trim();
+    if(!trim){
+      this.filteredNotes = [...this.Notes];
+      return;
+    }
+    this.filteredNotes = this.Notes.filter(note =>
+      note.title.toLowerCase().includes(trim) ||
+      note.content.toLowerCase().includes(trim) ||
+      note.tages.toLowerCase().includes(trim)
+    );
+    console.log(trim)
+} 
+  selectNote(note: any) {
+    this.selectedNote = note;
   }
-addNewTaskForm(){
-  this.AddTask = true;
-  console.log("clicked", this.AddTask)
+
+  addNewTaskForm(){
+    this.AddTask = true;
   }
+
   closeAddTaskForm() {
     this.AddTask = false;
-    console.log("s")
   }
+
   AddNewNote(addNote: {title: string, tages: string, date: string, content: string}){
     this.Notes.push({
       id: new Date().getTime().toString(),
@@ -73,20 +61,28 @@ addNewTaskForm(){
     })
     localStorage.setItem("Notes", JSON.stringify(this.Notes));
   }
-deleteNote(noteId: string) {
-  // Remove the note from the array
-  this.Notes = this.Notes.filter(note => note.id !== noteId);
 
-  // Save the updated array to localStorage
-  localStorage.setItem("Notes", JSON.stringify(this.Notes));
+    deleteNote(noteId: string) {
+      this.Notes = this.Notes.filter(note => note.id !== noteId);
+      localStorage.setItem("Notes", JSON.stringify(this.Notes));
+      if (this.selectedNote?.id === noteId) {
+      this.selectedNote = null;
+    }
+}
 
-  // Clear selected note if it was deleted
-  if (this.selectedNote?.id === noteId) {
-    this.selectedNote = null;
-    console.log("Selected note cleared");
+    archiveNote(noteId: string) {
+      if (!this.selectedNote || this.selectedNote.id !== noteId) return;
+      if(this.archivedNotes.some(a => a.id === this.selectedNote.id)){
+    }
+      else{
+      this.archivedNotes.push(this.selectedNote);
+      localStorage.setItem('archivedNotes', JSON.stringify(this.archivedNotes));
+    }
   }
-
-  console.log("After deletion:", this.Notes);
+  Clear(){
+    localStorage.clear();
+  }
 }
 
-}
+//b9aw lik ha tags displayihum tahuma w styling w ha nta saliti
+//la biti trj3ha resp mzyan 3la wdit tel(bdel design kamlo)
