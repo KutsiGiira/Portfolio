@@ -19,10 +19,10 @@ filteredNotes: any[] = []
   ngOnInit(){
       if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const StoredNotes = localStorage.getItem("Notes");
-      this.filteredNotes = [...this.Notes]
       this.archivedNotes = JSON.parse(localStorage.getItem('archivedNotes') || '[]');
       if(StoredNotes){
       this.Notes = JSON.parse(StoredNotes);
+      this.filteredNotes = [...this.Notes]
       }
     }
   }
@@ -32,12 +32,12 @@ filteredNotes: any[] = []
       this.filteredNotes = [...this.Notes];
       return;
     }
+    console.log(this.Notes)
     this.filteredNotes = this.Notes.filter(note =>
       note.title.toLowerCase().includes(trim) ||
       note.content.toLowerCase().includes(trim) ||
       note.tages.toLowerCase().includes(trim)
     );
-    console.log(trim)
 } 
   selectNote(note: any) {
     this.selectedNote = note;

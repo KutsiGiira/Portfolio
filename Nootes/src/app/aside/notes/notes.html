@@ -1,37 +1,67 @@
-<main class="">
-    <section class="bg-pink-100 w-[95%] flex justify-between border-b-1">
-            <span class="">All Notes</span>
-            <span class="flex">
-                <input type="text" placeholder="Search by title, content,or tags..." class="border mb-4" [(ngModel)]="search" (input)="filterNotes()">
+<main class="bg-white h-screen">
+    <section class="w-[100%] flex justify-between border-b-1  h-[60px]">
+            <span class="font-bold text-4xl align-center self-center">All Notes</span>
+            <div class="flex w-[25%]">
+                <input type="text" placeholder="Search by title, content,or tags..." [(ngModel)]="search" (input)="filterNotes()">
                 <div>icon</div>
-            </span>
+            </div>
     </section>
-    <section class="flex w-[98%] bg-yellow-200 h-fit justify-between">
-        <div>
-            <button class="bg-blue-600 text-white cursor-pointer" (click)="addNewTaskForm()">+ Create New Notes</button>
-            <div>
-                <ul>
+    <section class="flex w-[100%] h-fit justify-between">
+        <div class="w-[25%]">
+            <button class="text-white cursor-pointer" id="createBtn" (click)="addNewTaskForm()">+ Create New Notes</button>
+            <div >
+                <ul class="flex flex-col gap-2">
                     @for (note of filteredNotes; track note.id) {
-                        <li (click)="selectNote(note)" class="cursor-pointer bg-red-800" >
+                        <li (click)="selectNote(note)" class="cursor-pointer bg-[#E9E9E9] flex flex-col gap-2 w-[95%]">
+                            <div class="font-bold text-3xl align-center">
                             {{note.title}}
-                            
+                            </div>
+                            <div class="bg-[#C9CDCF] w-fit" id="tgz">
+                            {{note.tages}}
+                            </div>
+                            <div class=" w-fit">
+                            {{note.date}}
+                            </div>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="w-screen border-x-1">
             @if(selectedNote){
-                {{selectedNote.content}}
+                <div class="flex flex-col w-[98%] sticky top-0 gap-5" id="content">
+                    <h1 class="font-bold text-4xl">
+                        {{selectedNote.title}}
+                    </h1>
+                    <div class="flex flex-col gap-5 left-20">
+                        <div class="flex">
+                            <span class="w-[10%]">
+                            Tages: 
+                            </span>
+                        {{selectedNote.tages}}
+                        </div>
+                        <div class="flex">
+                            <span class="w-[10%]">
+                            Creation date:
+                            </span>
+                            {{selectedNote.date}}
+                        </div>
+                    <hr>
+                    <p class="text-lg">
+                        {{selectedNote.content}}
+                    </p>
+                    </div>
+                </div>
+
             }
             @else{
-                <p>Select a note or add new one</p>
+                <p class="text-center h-[100px] my-auto font-bold text-3xl">Select a note or add new one</p>
             }
         </div>
-        <div class="bg-pink-100 flex flex-col gap-5">
-            <button class="border p-10" (click)="archiveNote(selectedNote.id)" [disabled]="!selectedNote">Archive Note</button>
-            <button class="border p-10" (click)="deleteNote(selectedNote.id)" [disabled]="!selectedNote">Delete Note</button>
-            <button (click)="Clear()" class="bg-red-600">Clear All Notes</button>
+        <div class="flex flex-col gap-5 w-[25%]" id="btnHolder">
+            <button  id="btnRightSide" (click)="archiveNote(selectedNote.id)" [disabled]="!selectedNote">Archive Note</button>
+            <button  id="btnRightSide" (click)="deleteNote(selectedNote.id)" [disabled]="!selectedNote">Delete Note</button>
+            <button (click)="Clear()" id="btnRightSide" class="bg-red-600 text-white">Clear All Notes</button>
         </div>
     </section>
 </main>
