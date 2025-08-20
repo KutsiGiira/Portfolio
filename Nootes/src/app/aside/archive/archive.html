@@ -1,5 +1,24 @@
-<ul>
-  @for (note of ArchivedNotes; track note.id) {
-    <li >{{ note.title }}</li>
-  }
-</ul>
+<div class="h-screen bg-white">
+  <h1 class="text-center text-4xl font-semibold">Archived Notes</h1>
+  <ul class="flex flex-col gap-2">
+    @for (note of ArchivedNotes; track note.id) {
+      <li class="cursor-pointer bg-[#E9E9E9] flex flex-col gap-2 w-screen">
+        <div class="font-bold text-3xl align-center">
+           {{note.title}}
+        </div>
+        <div class="bg-[#C9CDCF] w-fit" id="tgz">
+          {{note.tages}}
+        </div>
+        <div class=" w-fit">
+          {{note.date}}
+        </div>
+        <div class="w-fit">
+          <span>
+            Content: 
+          </span>
+          {{note.content}}
+        </div>
+      </li>
+    }
+  </ul>
+</div>

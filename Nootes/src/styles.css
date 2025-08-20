@@ -4,3 +4,6 @@
     margin: 0px;
     font-family:Calibri, 'Trebuchet MS', sans-serif
 }
+button:hover{
+    cursor: pointer;
+}

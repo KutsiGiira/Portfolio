@@ -23,6 +23,7 @@ filteredNotes: any[] = []
       if(StoredNotes){
       this.Notes = JSON.parse(StoredNotes);
       this.filteredNotes = [...this.Notes]
+        
       }
     }
   }

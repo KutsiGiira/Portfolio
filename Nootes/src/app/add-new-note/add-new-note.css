@@ -1,0 +1,25 @@
+.backdrop {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 8px;
+  min-width: 700px;
+  max-width: 1000px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1010;
+  ;
+}
+form > input, textarea{
+    padding: 5px;
+    border: black 1px solid;
+    margin:auto 10px;
+}
+
+button{
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+label{
+    font-size: larger;
+    font-weight: 600;
+}

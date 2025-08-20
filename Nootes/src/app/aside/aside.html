@@ -3,8 +3,8 @@
     <!-- SIDEBAR -->
     <mat-sidenav mode="side" opened >
       <div class="flex items-center" id="navTitle">
-      <!-- <img [src]="logoPic" alt="Logo" class="w-10 h-10 mr-2"> -->
-        <h1 class="text-xl font-bold text-black">Nootes</h1>
+      <span id="Logo"></span>
+        <h1 class="text-2xl font-bold text-black">Nootes</h1>
       </div>
       <div>
       <mat-nav-list class="w-fit">
@@ -14,8 +14,19 @@
       </div>
       <div>
         <hr>
-        <section>
-        tags
+        <section id="listOfTages">
+          <ul>
+          @for(tage of tages; track tage){
+            <li class="text-2xl text-black font-bold flex items-center">
+                <span id="tagIcon">
+                </span>
+                <span>
+                  {{tage}}
+                </span>
+            </li>
+          }
+          </ul>
+
       </section>
       </div>
     </mat-sidenav>

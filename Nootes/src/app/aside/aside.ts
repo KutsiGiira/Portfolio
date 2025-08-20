@@ -15,5 +15,13 @@ import { RouterLink, RouterModule, RouterOutlet } from "@angular/router";
   styleUrl: './aside.css'
 })
 export class Aside {
-logoPic = "assets\images\f.png"
-}
+tages:string[] = [];
+    ngOnInit(){
+      const storeAllNotes = localStorage.getItem("Notes");
+      if(storeAllNotes){
+      const AllNotes = JSON.parse(storeAllNotes);
+      this.tages = AllNotes.flatMap((t:any) => t.tages || []);
+      this.tages = Array.from(new Set(this.tages))
+      }
+  }
+} 
