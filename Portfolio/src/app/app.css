@@ -1,3 +1,19 @@
-span{
+#p > span{
     font-weight: bold;
+}
+form > input {
+    border-bottom: white 1px solid;
+    padding: 10px;
+    width: 150%;
+}
+#projDiv, #ClickBtn{
+    margin: 0px auto;
+}
+#ClickBtn{
+    padding: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+#s{
+    margin-top: 30px;
 }
