@@ -22,6 +22,7 @@
       <span class="relative left-70 self-start text-xl hover:underline">Contact Me</span>
     </div>
     <div class="bg-[#2C2C2C] h-200 w-400 relative right-30">
+      <img src="../assets/profile.jpg" alt="e" class="w-fit h-full object-cover">
       </div>
     </section>
     <hr class="w-[80%] self-center h-0.5 bg-black">
@@ -41,9 +42,12 @@
     <div class="grid grid-cols-3 gap-10" id="projDiv">
       @for(p of ShowAll; track p){
         <div>
-          <section>
-            <a href={{p.Link}} target="_blank">
-              <div class="bg-purple-200 w-120 h-100"></div>
+          <section class="p-4">
+            <a [href]="p.Link" target="_blank" class="group block">
+              <div
+                class="bg-purple-200 w-120 h-60 rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+                <img [src]="p.Image" alt="Note" class="w-fit h-fit object-cover">
+              </div>
             </a>
           </section>
           <p class="font-bold text-xl">{{p.Title}}</p>
@@ -81,3 +85,7 @@
     </section>
   </footer>
 </main>
+
+<!-- link dyal gmail 
+lkmala d projyat
+footer contact itlinka m3a gmail dyalk -->

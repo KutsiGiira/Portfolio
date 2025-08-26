@@ -34,37 +34,37 @@ export class App {
   ShowProjects: boolean = false;
   Projects:Project[] = [
     {
-      "Image": "Shi 7aja",
-      "Title": "Titlte",
+      "Image": "assets/nootes.jpg",
+      "Title": "Note-taking web app",
+      "Language": "Angular Tailwind",
+      "Link": "https://github.com/KutsiGiira/Portfolio/tree/main/Nootes"
+    },
+        {
+      "Image": "assets/UserWebCar.JPG",
+      "Title": "Car Rental web app",
+      "Language": "Spring Boot - React - MySQL",
+      "Link": "https://github.com/KutsiGiira/Portfolio/tree/main/Car%20Rent"
+    },
+        {
+      "Image": "assets/nootes.jpg",
+      "Title": "Ray Tracing",
       "Language": "Java",
       "Link": "sshshhshs"
     },
         {
-      "Image": "Shi 7aja1",
-      "Title": "Titlte1",
-      "Language": "Java1",
-      "Link": "sshshhshs"
-    },
-        {
-      "Image": "Shi 7aja1",
-      "Title": "Titlte1",
-      "Language": "Java1",
-      "Link": "sshshhshs"
-    },
-        {
-      "Image": "Shi 7aja",
+      "Image": "assets/nootes.jpg",
       "Title": "Titlte",
       "Language": "Java Javascript PHP",
       "Link": "sshshhshs"
     },
         {
-      "Image": "Shi 7aja1",
+      "Image": "assets/nootes.jpg",
       "Title": "Titlte1",
       "Language": "Java1",
       "Link": "sshshhshs"
     },
         {
-      "Image": "Shi 7aja1",
+      "Image": "assets/nootes.jpg",
       "Title": "Titlte1",
       "Language": "Java1",
       "Link": "sshshhshs"
