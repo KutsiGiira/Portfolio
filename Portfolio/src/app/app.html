@@ -4,7 +4,7 @@
   <div >
     <ul class="flex gap-10 items-center">
       @for(s of Social; track s){
-        <a href={{s.Link}}  target="_blank" >{{s.Platform}}</a>
+        <a href={{s.Link}}>{{s.Platform}}</a>
       }
     </ul>
   </div>
@@ -19,7 +19,9 @@
         My name is <span>{{Name}}</span> , a motivated <span>Full Stack Developer</span>with hands-on experience in building responsive front-end interfaces and efficient back-end systems. 
         Passionate about creating clean, scalable, and user-centered digital solutions, I thrive on solving complex problems and turning ideas into impactful applications. Driven by continuous learning and growth, I am eager to contribute my skills to innovative projects and deliver value to forward-thinking teams.
       </p>
-      <span class="relative left-70 self-start text-xl hover:underline">Contact Me</span>
+<a [attr.href]="'https://mail.google.com/mail/?view=cm&fs=1&to=haytamboualkhours@gmail.com'" target="_blank" rel="noopener noreferrer" class="relative left-70 self-start text-xl hover:underline">
+   Contact Me
+</a>
     </div>
     <div class="bg-[#2C2C2C] h-200 w-400 relative right-30">
       <img src="../assets/profile.jpg" alt="e" class="w-fit h-full object-cover">
@@ -37,7 +39,9 @@
     </div>
     <div class="flex justify-around">
       <h1 class="text-7xl font-bold">Projects</h1>
-      <span class="text-xl hover:underline self-center">Contact Me</span>
+      <a [attr.href]="'https://mail.google.com/mail/?view=cm&fs=1&to=haytamboualkhours@gmail.com'" target="_blank" rel="noopener noreferrer" class="text-xl hover:underline self-center">
+   Contact Me
+</a>
     </div>
     <div class="grid grid-cols-3 gap-10" id="projDiv">
       @for(p of ShowAll; track p){
@@ -64,12 +68,6 @@
         <p class="font-light ">Thank you for visiting my portfolio! Every project here reflects my passion for building creative and efficient solutions in web development. <br> I’m always eager to learn, take on new challenges, and collaborate on meaningful projects. Feel free to reach out if you’d like to connect, <br> work together, or simply share ideas.</p>
       </div>
       <div>
-        <form class="flex flex-col gap-10">
-          <input type="text" name="Name" placeholder="Name">
-          <input type="text" name="Email" placeholder="Email">
-          <input type="text" name="Subject" placeholder="Subject">
-          <button type="submit" class="relative left-40 underline ">SEND MESSAGE</button>
-        </form>
       </div>
     </section>
     <section class="relative top-50 flex flex-col gap-10 text-2xl">
@@ -85,7 +83,3 @@
     </section>
   </footer>
 </main>
-
-<!-- link dyal gmail 
-lkmala d projyat
-footer contact itlinka m3a gmail dyalk -->

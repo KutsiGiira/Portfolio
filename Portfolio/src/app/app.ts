@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 interface Project {
   Image: string;
   Title: string;
@@ -24,7 +25,7 @@ export class App {
       "Link": "https://github.com/KutsiGiira"
     },
     { "Platform": "Gmail",
-      "Link": "mailto:haytamboualkhours@gmail.com"
+      "Link": "https://mail.google.com/mail/?view=cm&fs=1&to=haytamboualkhours@gmail.com"
     },
     {"Platform": "LinkedIn",
       "Link": "https://www.linkedin.com/in/haytam-boualkhours/"
@@ -36,7 +37,7 @@ export class App {
     {
       "Image": "assets/nootes.jpg",
       "Title": "Note-taking web app",
-      "Language": "Angular Tailwind",
+      "Language": "Angular - Tailwind",
       "Link": "https://github.com/KutsiGiira/Portfolio/tree/main/Nootes"
     },
         {
@@ -46,35 +47,39 @@ export class App {
       "Link": "https://github.com/KutsiGiira/Portfolio/tree/main/Car%20Rent"
     },
         {
-      "Image": "assets/nootes.jpg",
-      "Title": "Ray Tracing",
-      "Language": "Java",
-      "Link": "sshshhshs"
+      "Image": "assets/restaurant.JPG",
+      "Title": "Restaurant Landing Page",
+      "Language": "React",
+      "Link": "https://github.com/KutsiGiira/Portfolio/tree/main/landing-mvp"
     },
-        {
-      "Image": "assets/nootes.jpg",
-      "Title": "Titlte",
-      "Language": "Java Javascript PHP",
-      "Link": "sshshhshs"
-    },
-        {
-      "Image": "assets/nootes.jpg",
-      "Title": "Titlte1",
-      "Language": "Java1",
-      "Link": "sshshhshs"
-    },
-        {
-      "Image": "assets/nootes.jpg",
-      "Title": "Titlte1",
-      "Language": "Java1",
-      "Link": "sshshhshs"
-    },
+    //     {
+    //   "Image": "assets/nootes.jpg",
+    //   "Title": "Titlte",
+    //   "Language": "Java Javascript PHP",
+    //   "Link": "sshshhshs"
+    // },
+    //     {
+    //   "Image": "assets/nootes.jpg",
+    //   "Title": "Titlte1",
+    //   "Language": "Java1",
+    //   "Link": "sshshhshs"
+    // },
+    //     {
+    //   "Image": "assets/nootes.jpg",
+    //   "Title": "Titlte1",
+    //   "Language": "Java1",
+    //   "Link": "sshshhshs"
+    // },
   ]
   protected readonly title = signal('Portfolio');
   get ShowAll(){
     return this.ShowProjects ? this.Projects : this.Projects.slice(0, 3)
   }
+    form = { name: '', email: '', subject: '',};
   Clicked(){
     this.ShowProjects = !this.ShowProjects
   }
+  openEmail() {
+  window.location.href = "mailto:haytamboualkhours@gmail.com";
+}
 }
