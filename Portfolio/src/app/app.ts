@@ -73,11 +73,7 @@ export class App {
   get ShowAll(){
     return this.ShowProjects ? this.Projects : this.Projects.slice(0, 3)
   }
-    form = { name: '', email: '', subject: '',};
   Clicked(){
     this.ShowProjects = !this.ShowProjects
   }
-  openEmail() {
-  window.location.href = "mailto:haytamboualkhours@gmail.com";
-}
 }
